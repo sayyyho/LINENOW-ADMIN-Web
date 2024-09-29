@@ -1,4 +1,11 @@
+import { InputPassword } from "@linenow/design-system";
+
 const LoginPage = () => {
-  return <div>로그인</div>;
+  return (
+    <>
+      <p>로그인</p>
+      <InputPassword />
+    </>
+  );
 };
 export default LoginPage;

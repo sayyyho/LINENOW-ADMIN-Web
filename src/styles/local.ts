@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 const LocalStyle = createGlobalStyle`
     // 초기 html 설정
     html {
-        background-color: ${({ theme }) => theme.colors.background.blueLight};
+        background-color: ${({ theme }) => theme.colors.background.blackLight};
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color:rgb(0 0 0 / 0%);
         scroll-behavior: smooth; 
