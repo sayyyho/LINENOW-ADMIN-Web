@@ -1,5 +1,5 @@
 // styles
-import { theme } from "@linenow/design-system";
+import { GlobalStyle, theme } from "@linenow/design-system";
 import { ThemeProvider } from "styled-components";
 
 // routers
@@ -14,6 +14,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
         <RouterProvider router={router} />
       </ThemeProvider>
     </QueryClientProvider>
