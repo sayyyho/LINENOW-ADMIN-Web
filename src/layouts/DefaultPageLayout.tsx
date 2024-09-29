@@ -6,13 +6,13 @@ import { Outlet } from "react-router-dom";
 
 const DefaultPageLayout = () => {
   return (
-    <>
+    <S.DefaultLayoutGrid>
       <Navigation />
-      <S.DefaultPageOutletWrapper>
-        <Sidebar />
+      <Sidebar />
+      <S.DefaultLayoutOutletWrapper>
         <Outlet />
-      </S.DefaultPageOutletWrapper>
-    </>
+      </S.DefaultLayoutOutletWrapper>
+    </S.DefaultLayoutGrid>
   );
 };
 

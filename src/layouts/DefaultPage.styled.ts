@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-export const DefaultPageOutletWrapper = styled.section`
-  display: flex;
-  flex-grow: 1;
-
-  width: 100%;
+export const DefaultLayoutGrid = styled.section`
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 16rem 1fr;
+  height: 100vh;
+`;
+export const DefaultLayoutOutletWrapper = styled.section`
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
 `;

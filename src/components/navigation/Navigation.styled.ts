@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const NavigationWrapper = styled.header`
+  grid-column: 1 / 3;
+
   width: 100%;
   height: 3.5rem;
 
