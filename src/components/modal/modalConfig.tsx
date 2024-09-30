@@ -1,4 +1,4 @@
-import { ModalProps } from "@linenow/design-system/components/modal/Modal";
+import { ModalProps } from "@linenow/system/components/modal/Modal";
 
 interface ModalExtensionProps extends Omit<ModalProps, "isOpen"> {}
 

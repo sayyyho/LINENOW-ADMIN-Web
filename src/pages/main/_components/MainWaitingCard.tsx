@@ -1,20 +1,19 @@
-// interfaces
-import { Waiting } from "@interfaces/waiting";
-
-// components
-import * as S from "./MainWaitingCard.styled";
 import {
   Button,
   ButtonLayout,
   Chip,
   CommonButton,
   IconLabel,
-} from "@linenow/design-system";
+  useModal,
+} from "@linenow/system";
+
+// interfaces
+import { Waiting } from "@interfaces/waiting";
+
+// components
+import * as S from "./MainWaitingCard.styled";
 import { useMainWaitingCard } from "./_hooks/useMainWaitingCard";
 import { cancelWaitingModal } from "@components/modal/modalConfig";
-
-// hooks
-import { useModal } from "@linenow/design-system";
 
 interface MainWaitingCardProps {
   waiting: Waiting;

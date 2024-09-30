@@ -1,4 +1,4 @@
-import { InputPassword } from "@linenow/design-system";
+import { InputPassword } from "@linenow/system";
 
 const LoginPage = () => {
   return (

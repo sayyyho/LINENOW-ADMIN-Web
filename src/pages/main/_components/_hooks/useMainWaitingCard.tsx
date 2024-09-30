@@ -1,10 +1,11 @@
+import { useCountdown, useModal } from "@linenow/system";
+import { ButtonProps } from "@linenow/system/components/button/Button";
+
 import {
   approveWaitingModal,
   callWaitingModal,
 } from "@components/modal/modalConfig";
 import { WaitingStatus } from "@linenow-types/status";
-import { useCountdown, useModal } from "@linenow/design-system";
-import { ButtonProps } from "@linenow/design-system/components/button/Button";
 
 interface MainWaitingCardProps {
   userName: string;

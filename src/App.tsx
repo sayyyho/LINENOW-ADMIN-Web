@@ -1,10 +1,8 @@
+import { GlobalStyle, Modal, theme } from "@linenow/system";
+
 // styles
-import { GlobalStyle, theme } from "@linenow/design-system";
 import LocalStyle from "@styles/local";
 import { ThemeProvider } from "styled-components";
-
-// components
-import { Modal } from "@linenow/design-system";
 
 // routers
 import { RouterProvider } from "react-router-dom";
