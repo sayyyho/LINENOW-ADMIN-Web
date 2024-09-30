@@ -4,8 +4,6 @@ import { User } from "./user";
 export interface Waiting {
   waitingID: number;
   waitingStatus: WaitingStatus;
-  waitingTeamsAhead?: number;
-  waitingCount?: number;
 
   partySize: number;
 

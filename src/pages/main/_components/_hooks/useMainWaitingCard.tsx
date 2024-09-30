@@ -113,6 +113,5 @@ export const useMainWaitingCard = ({
       partySizeColor: "grayLight",
     },
   };
-
   return mainWaitingCardConfig[waitingStatus];
 };

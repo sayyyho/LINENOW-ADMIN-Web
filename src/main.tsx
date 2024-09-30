@@ -2,15 +2,24 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 
-const deviceType = "tablet";
-const rootElement = document.getElementById("root");
+// mocks
+import { worker } from "./mocks/browser.ts";
 
-if (rootElement) {
-  rootElement.className = deviceType;
+worker
+  .start({
+    onUnhandledRequest: "bypass",
+  })
+  .then(() => {
+    const deviceType = "tablet";
+    const rootElement = document.getElementById("root");
 
-  ReactDOM.createRoot(rootElement).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
-}
+    if (rootElement) {
+      rootElement.className = deviceType;
+
+      ReactDOM.createRoot(rootElement).render(
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      );
+    }
+  });
