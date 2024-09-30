@@ -3,6 +3,7 @@ import {
   ButtonLayout,
   Chip,
   CommonButton,
+  IconLabel,
 } from "@linenow/design-system";
 import * as S from "./MainWaitingCard.styled";
 
@@ -11,8 +12,8 @@ const MainWaitingCard = () => {
     <S.MainWaitingCardWrapper>
       <S.MainWaitingCardContentWrapper>
         <S.MainWaitingCardHeader>
-          <p>004</p>
-          <span>오후 12시 34분 · 2024년 9월 24일 </span>
+          <span className="waitingID">004</span>
+          <span className="waitingTime">오후 12시 34분</span>
           <CommonButton>
             <Chip scheme="grayLight" shape="outline">
               대기취소
@@ -23,13 +24,19 @@ const MainWaitingCard = () => {
         <S.MainWaitingCardInfoBox>
           <S.MainWaitingCardPartySizeInfo>
             <label>입장인원</label>
-            <span>3명</span>
+            <span className="partySize">3명</span>
           </S.MainWaitingCardPartySizeInfo>
-          {/* <div /> */}
-          <S.MainWaitingCardUserInfo>
-            <span>심서현님</span>
 
-            <span>01023834346</span>
+          <S.MainWaitingCardUserInfo>
+            <span className="userName">심서현</span>
+            <IconLabel
+              font={"b3"}
+              gap={"0.25rem"}
+              icon={{ name: "call_gray", size: "1rem" }}
+            >
+              {/* TODO:- components로 빼기 */}
+              <span className="userPhone">01023834346</span>
+            </IconLabel>
           </S.MainWaitingCardUserInfo>
         </S.MainWaitingCardInfoBox>
 

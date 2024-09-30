@@ -6,7 +6,6 @@ const MainPage = () => {
     <S.MainWaitingCardList>
       <MainWaitingCard />
       <MainWaitingCard />
-
       <MainWaitingCard />
     </S.MainWaitingCardList>
   );

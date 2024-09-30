@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const MainWaitingCardList = styled.section`
   display: grid;
   align-items: start;
-  column-gap: 2.5rem;
-  row-gap: 1.5rem;
+  column-gap: 1.5rem;
+  row-gap: 2.5rem;
 
   grid-template-columns: repeat(1, 1fr); /* 기본 1열 */
 

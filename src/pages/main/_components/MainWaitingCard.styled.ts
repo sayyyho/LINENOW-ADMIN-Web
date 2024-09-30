@@ -1,12 +1,12 @@
-import { theme } from "@linenow/design-system";
 import styled from "styled-components";
 
 export const MainWaitingCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
 
+  overflow: hidden;
+
   width: 100%;
-  min-width: 20rem;
   height: auto;
 
   border-radius: 0.75rem;
@@ -28,13 +28,30 @@ export const MainWaitingCardHeader = styled.div`
   gap: 0.5rem;
   align-items: center;
 
-  padding: 0.25rem 0.25rem 0.75rem 0.25rem;
+  padding: 0.25rem;
+  padding-bottom: 0.75rem;
 
-  ${({ theme }) => theme.fonts.h1}
-  span {
+  > .waitingID {
+    flex-shrink: 0;
+
+    width: 3.25rem;
+
+    text-align: center;
+
+    ${({ theme }) => theme.fonts.h1}
+    color: ${({ theme }) => theme.colors.font.blue};
+  }
+  > .waitingTime {
+    flex-grow: 1;
+
+    overflow: hidden;
+
     ${({ theme }) => theme.fonts.caption}
     color: ${({ theme }) => theme.colors.font.gray};
-    flex-grow: 1;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
   }
 `;
 
@@ -53,20 +70,41 @@ export const MainWaitingCardPartySizeInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 0.25rem;
 
-  padding: 0rem 1.25rem;
+  width: 4rem;
 
-  border-right: 1px solid;
-  border-color: ${({ theme }) => theme.colors.border.gray};
+  margin: 0rem 1.25rem;
 
   > label {
     ${({ theme }) => theme.fonts.caption}
     color: ${({ theme }) => theme.colors.font.gray};
+  }
+
+  > .partySize {
+    ${({ theme }) => theme.fonts.h1}
+    color: ${({ theme }) => theme.colors.font.blue};
   }
 `;
 
 export const MainWaitingCardUserInfo = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+
+  border-left: 1px solid;
+  border-color: ${({ theme }) => theme.colors.border.gray};
+
   padding: 0rem 1.25rem;
+
+  > .userName {
+    ${({ theme }) => theme.fonts.h3}
+    color: ${({ theme }) => theme.colors.font.black};
+  }
+
+  .userPhone {
+    ${({ theme }) => theme.fonts.b3}
+    color: ${({ theme }) => theme.colors.font.gray};
+    text-decoration: underline;
+  }
 `;
