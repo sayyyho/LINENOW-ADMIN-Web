@@ -15,14 +15,16 @@ interface MainWaitingCardProps {
 const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
   const config = useMainWaitingCard({
     waitingStatus: waiting.waitingStatus,
-    targetTime: "111",
+    targetTime: waiting.arrivalRemainingTime,
   });
 
   return (
     <S.MainWaitingCardWrapper>
       <S.MainWaitingCardContentWrapper>
         <S.MainWaitingCardHeader>
-          <span className="waitingID">{waiting.waitingID}</span>
+          <span className="waitingID">
+            {waiting.waitingID.toString().padStart(3, "0")}
+          </span>
           <span className="waitingTime">{waiting.registeredAt}</span>
 
           {config.isValidate ? (
@@ -43,12 +45,14 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
           <S.MainWaitingCardUserInfo>
             <span className="userName">{waiting.user.name}</span>
             <IconLabel
-              font={"b3"}
               gap={"0.25rem"}
               icon={{ name: "call_gray", size: "1rem" }}
+              font={"b3"}
+              fontColor={"gray"}
             >
-              {/* TODO:- components로 빼기 */}
-              <span className="userPhone">{waiting.user.phoneNumber}</span>
+              <span style={{ textDecoration: "underline" }}>
+                {waiting.user.phoneNumber}
+              </span>
             </IconLabel>
           </S.MainWaitingCardUserInfo>
         </S.MainWaitingCardInfoBox>

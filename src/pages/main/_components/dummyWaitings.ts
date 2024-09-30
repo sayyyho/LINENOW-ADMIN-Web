@@ -7,7 +7,7 @@ export const dummyWaitingsResponse: Waiting[] = [
     waitingTeamsAhead: 5,
     partySize: 4,
     user: {
-      userID: "u001",
+      userID: 1,
       name: "John Smith",
       phoneNumber: "010-1234-5678",
     },
@@ -21,7 +21,7 @@ export const dummyWaitingsResponse: Waiting[] = [
     waitingTeamsAhead: 0,
     partySize: 6,
     user: {
-      userID: "u002",
+      userID: 2,
       name: "Jane Doe",
       phoneNumber: "010-9876-5432",
     },
@@ -35,7 +35,7 @@ export const dummyWaitingsResponse: Waiting[] = [
     waitingTeamsAhead: 1,
     partySize: 2,
     user: {
-      userID: "u003",
+      userID: 3,
       name: "Alice Kim",
       phoneNumber: "010-2222-3333",
     },
@@ -49,7 +49,7 @@ export const dummyWaitingsResponse: Waiting[] = [
     waitingTeamsAhead: 4,
     partySize: 3,
     user: {
-      userID: "u004",
+      userID: 4,
       name: "Bob Lee",
       phoneNumber: "010-4444-5555",
     },
@@ -63,7 +63,7 @@ export const dummyWaitingsResponse: Waiting[] = [
     waitingTeamsAhead: 0,
     partySize: 2,
     user: {
-      userID: "u005",
+      userID: 5,
       name: "Charlie Park",
       phoneNumber: "010-6666-7777",
     },
@@ -77,7 +77,7 @@ export const dummyWaitingsResponse: Waiting[] = [
     waitingTeamsAhead: 3,
     partySize: 5,
     user: {
-      userID: "u006",
+      userID: 6,
       name: "David Choi",
       phoneNumber: "010-8888-9999",
     },

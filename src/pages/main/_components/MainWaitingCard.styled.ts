@@ -39,7 +39,6 @@ export const MainWaitingCardHeader = styled.div`
     text-align: center;
 
     ${({ theme }) => theme.fonts.h1}
-    color: ${({ theme }) => theme.colors.font.blue};
   }
   > .waitingTime {
     flex-grow: 1;
@@ -100,11 +99,5 @@ export const MainWaitingCardUserInfo = styled.div`
   > .userName {
     ${({ theme }) => theme.fonts.h3}
     color: ${({ theme }) => theme.colors.font.black};
-  }
-
-  .userPhone {
-    ${({ theme }) => theme.fonts.b3}
-    color: ${({ theme }) => theme.colors.font.gray};
-    text-decoration: underline;
   }
 `;
