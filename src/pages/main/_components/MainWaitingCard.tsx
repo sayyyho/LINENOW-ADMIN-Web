@@ -1,25 +1,44 @@
+// interfaces
+import { Waiting } from "@interfaces/waiting";
+
+// components
+import * as S from "./MainWaitingCard.styled";
 import {
+  Button,
   ButtonLayout,
   Chip,
   CommonButton,
   IconLabel,
 } from "@linenow/design-system";
-import * as S from "./MainWaitingCard.styled";
-import { Waiting } from "@interfaces/waiting";
 import { useMainWaitingCard } from "./_hooks/useMainWaitingCard";
+import { cancelWaitingModal } from "@components/modal/modalConfig";
+
+// hooks
+import { useModal } from "@linenow/design-system";
 
 interface MainWaitingCardProps {
   waiting: Waiting;
 }
 
 const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
+  const { openModal } = useModal();
+
+  const handleCancelWaitingButton = () => {
+    console.log("클릭");
+    openModal(cancelWaitingModal(waiting.user.name));
+  };
+
   const config = useMainWaitingCard({
+    userName: waiting.user.name,
     waitingStatus: waiting.waitingStatus,
     targetTime: waiting.arrivalRemainingTime,
   });
 
   return (
-    <S.MainWaitingCardWrapper>
+    <S.MainWaitingCardWrapper
+      $backgroundColor={config.backgroundColor}
+      style={{ opacity: `${config.userInfoOpacity}` }}
+    >
       <S.MainWaitingCardContentWrapper>
         <S.MainWaitingCardHeader>
           <span className="waitingID">
@@ -28,7 +47,7 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
           <span className="waitingTime">{waiting.registeredAt}</span>
 
           {config.isValidate ? (
-            <CommonButton>
+            <CommonButton onClick={handleCancelWaitingButton}>
               <Chip scheme="grayLight" shape="outline">
                 대기취소
               </Chip>
@@ -36,7 +55,9 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
           ) : null}
         </S.MainWaitingCardHeader>
 
-        <S.MainWaitingCardInfoBox>
+        <S.MainWaitingCardInfoBox
+          style={{ opacity: `${config.userInfoOpacity}` }}
+        >
           <S.MainWaitingCardPartySizeInfo>
             <label>입장인원</label>
             <span className="partySize">{waiting.partySize}명</span>
@@ -57,9 +78,15 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
           </S.MainWaitingCardUserInfo>
         </S.MainWaitingCardInfoBox>
 
-        <ButtonLayout $col={2} $colTemplate="1fr 6.25rem">
-          {config.primaryButton}
-          {config.secondButton}
+        <ButtonLayout
+          $col={config.secondButton ? 2 : 1}
+          $colTemplate={config.secondButton ? "1fr 6.25rem" : ""}
+        >
+          <Button size="medium" shape="fill" {...config.primaryButton} />
+
+          {config.secondButton && (
+            <Button size="medium" shape="fill" {...config.secondButton} />
+          )}
         </ButtonLayout>
       </S.MainWaitingCardContentWrapper>
     </S.MainWaitingCardWrapper>

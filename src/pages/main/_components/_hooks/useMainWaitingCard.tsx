@@ -1,99 +1,117 @@
+import {
+  approveWaitingModal,
+  callWaitingModal,
+} from "@components/modal/modalConfig";
 import { WaitingStatus } from "@linenow-types/status";
-import { Button } from "@linenow/design-system";
-import { ReactNode } from "react";
+import { useCountdown, useModal } from "@linenow/design-system";
+import { ButtonProps } from "@linenow/design-system/components/button/Button";
 
 interface MainWaitingCardProps {
+  userName: string;
   waitingStatus: WaitingStatus;
   targetTime?: string;
 }
 
+interface MainWaitingCardButtonProps
+  extends Omit<ButtonProps, "size" | "width" | "shape"> {}
+
 interface MainWaitingCardConfig {
   backgroundColor: string;
   isValidate: boolean;
-  primaryButton: ReactNode;
-  secondButton?: ReactNode;
+  primaryButton: MainWaitingCardButtonProps;
+  secondButton?: MainWaitingCardButtonProps;
 
   partySizeColor?: string;
-  userInfoOpercity?: string;
+  userInfoOpacity?: string;
 }
 
 export const useMainWaitingCard = ({
   waitingStatus,
   targetTime,
-}: MainWaitingCardProps) => {
+  userName,
+}: MainWaitingCardProps): MainWaitingCardConfig => {
+  const { getTime } = useCountdown({
+    targetDate: targetTime || "1970-01-01T00:00:00.000Z",
+  });
+
+  const { openModal } = useModal();
+
+  const handleApproveWaitingButton = () => {
+    openModal(approveWaitingModal(userName));
+  };
+
+  const handleCallWaitingButton = () => {
+    openModal(callWaitingModal(userName));
+  };
+
+  const callWaitingButton: MainWaitingCardButtonProps = {
+    children: "대기 호출하기",
+    scheme: "blue",
+    onClick: handleCallWaitingButton,
+  };
+
+  const approveWaitingButton = (
+    abled: boolean
+  ): MainWaitingCardButtonProps => ({
+    children: "입장완료",
+    scheme: "blueLight",
+    disabled: !abled,
+    onClick: handleApproveWaitingButton,
+  });
+
   const mainWaitingCardConfig: Record<WaitingStatus, MainWaitingCardConfig> = {
-    // waiting: - 대기 중임
     waiting: {
       backgroundColor: "blueLight",
       isValidate: true,
-      primaryButton: (
-        <Button size="medium" scheme="blue" shape="fill">
-          대기 호출하기
-        </Button>
-      ),
-      secondButton: (
-        <Button size="medium" shape="fill" scheme="grayLight" disabled>
-          입장완료
-        </Button>
-      ),
+      primaryButton: callWaitingButton,
+      secondButton: approveWaitingButton(false),
     },
 
-    // readyToConfirm: - 입장 확정을 받기 위한 3분의 기다림
     ready_to_confirm: {
       backgroundColor: "limeLight",
       isValidate: true,
-      primaryButton: (
-        <Button size="medium" scheme="limeLight" shape="fill">
-          손님이 입장을 확정중이에요
-        </Button>
-      ),
-      secondButton: (
-        <Button size="medium" shape="fill" scheme="blueLight">
-          입장완료
-        </Button>
-      ),
+      primaryButton: {
+        children: "손님이 입장을 확정중이에요",
+        scheme: "limeLight",
+      },
+      secondButton: approveWaitingButton(true),
     },
 
-    // confirmed: - 입장 확정 후, 부스 입장을 위한 10분의 기다림
     confirmed: {
       backgroundColor: "lime",
       isValidate: true,
-      primaryButton: (
-        <Button size="medium" scheme="lime" shape="fill">
-          <span>손님이 오고 있어요!</span>
-          <span>10:00</span>
-        </Button>
-      ),
-      secondButton: (
-        <Button size="medium" shape="fill" scheme="blueLight">
-          입장완료
-        </Button>
-      ),
+      primaryButton: {
+        children: [
+          <span key={1}>손님이 오고 있어요!</span>,
+          <span key={2}>{getTime("MMSS")}</span>,
+        ],
+        scheme: "lime",
+      },
+      secondButton: approveWaitingButton(true),
     },
 
-    // arrived: 부스에 입장을 완료함
     arrived: {
       backgroundColor: "grayLight",
       isValidate: false,
-      primaryButton: (
-        <Button size="medium" scheme="grayLight" shape="fill" disabled>
-          입장을 완료했어요
-        </Button>
-      ),
-      userInfoOpercity: "20%",
+      primaryButton: {
+        children: "입장을 완료했어요",
+        scheme: "grayLight",
+        disabled: true,
+      },
+      userInfoOpacity: "20%",
     },
 
-    // canceled: - 대기가 취소됨
     canceled: {
       backgroundColor: "grayLight",
       isValidate: false,
-      primaryButton: (
-        <Button size="medium" scheme="grayLight" shape="fill" disabled>
-          대기가 취소되었어요
-        </Button>
-      ),
+      primaryButton: {
+        children: "대기가 취소되었어요",
+        scheme: "grayLight",
+        disabled: true,
+      },
       partySizeColor: "grayLight",
     },
   };
+
   return mainWaitingCardConfig[waitingStatus];
 };

@@ -1,10 +1,10 @@
 // components
-import * as S from "./DefaultPage.styled";
+import * as S from "./DefaultLayout.styled";
 import Navigation from "@components/navigation/Navigation";
 import Sidebar from "@components/sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
 
-const DefaultPageLayout = () => {
+const DefaultLayout = () => {
   return (
     <S.DefaultLayoutGrid>
       <Navigation />
@@ -16,4 +16,4 @@ const DefaultPageLayout = () => {
   );
 };
 
-export default DefaultPageLayout;
+export default DefaultLayout;

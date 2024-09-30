@@ -10,8 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@linenow/design-system": "^0.0.10",
+    "@linenow/design-system": "^0.0.11",
     "@tanstack/react-query": "^5.56.2",
+    "jotai": "^2.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.26.2",

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const MainWaitingCardWrapper = styled.div`
+interface MainWaitingCardWrapperProps {
+  $backgroundColor: string;
+}
+
+export const MainWaitingCardWrapper = styled.div<MainWaitingCardWrapperProps>`
   display: flex;
   flex-direction: column;
 
@@ -11,7 +15,8 @@ export const MainWaitingCardWrapper = styled.div`
 
   border-radius: 0.75rem;
 
-  background-color: lime;
+  background-color: ${({ $backgroundColor, theme }) =>
+    theme.colors.scheme[$backgroundColor].background};
 `;
 
 export const MainWaitingCardContentWrapper = styled.section`
