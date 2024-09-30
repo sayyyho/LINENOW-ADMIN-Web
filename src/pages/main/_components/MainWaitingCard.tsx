@@ -1,48 +1,61 @@
 import {
-  Button,
   ButtonLayout,
   Chip,
   CommonButton,
   IconLabel,
 } from "@linenow/design-system";
 import * as S from "./MainWaitingCard.styled";
+import { Waiting } from "@interfaces/waiting";
+import { useMainWaitingCard } from "./_hooks/useMainWaitingCard";
 
-const MainWaitingCard = () => {
+interface MainWaitingCardProps {
+  waiting: Waiting;
+}
+
+const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
+  const config = useMainWaitingCard({
+    waitingStatus: waiting.waitingStatus,
+    targetTime: "111",
+  });
+
   return (
     <S.MainWaitingCardWrapper>
       <S.MainWaitingCardContentWrapper>
         <S.MainWaitingCardHeader>
-          <span className="waitingID">004</span>
-          <span className="waitingTime">오후 12시 34분</span>
-          <CommonButton>
-            <Chip scheme="grayLight" shape="outline">
-              대기취소
-            </Chip>
-          </CommonButton>
+          <span className="waitingID">{waiting.waitingID}</span>
+          <span className="waitingTime">{waiting.registeredAt}</span>
+
+          {config.isValidate ? (
+            <CommonButton>
+              <Chip scheme="grayLight" shape="outline">
+                대기취소
+              </Chip>
+            </CommonButton>
+          ) : null}
         </S.MainWaitingCardHeader>
 
         <S.MainWaitingCardInfoBox>
           <S.MainWaitingCardPartySizeInfo>
             <label>입장인원</label>
-            <span className="partySize">3명</span>
+            <span className="partySize">{waiting.partySize}명</span>
           </S.MainWaitingCardPartySizeInfo>
 
           <S.MainWaitingCardUserInfo>
-            <span className="userName">심서현</span>
+            <span className="userName">{waiting.user.name}</span>
             <IconLabel
               font={"b3"}
               gap={"0.25rem"}
               icon={{ name: "call_gray", size: "1rem" }}
             >
               {/* TODO:- components로 빼기 */}
-              <span className="userPhone">01023834346</span>
+              <span className="userPhone">{waiting.user.phoneNumber}</span>
             </IconLabel>
           </S.MainWaitingCardUserInfo>
         </S.MainWaitingCardInfoBox>
 
         <ButtonLayout $col={2} $colTemplate="1fr 6.25rem">
-          <Button size="medium">1</Button>
-          <Button size="medium">2</Button>
+          {config.primaryButton}
+          {config.secondButton}
         </ButtonLayout>
       </S.MainWaitingCardContentWrapper>
     </S.MainWaitingCardWrapper>

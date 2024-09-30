@@ -1,0 +1,88 @@
+import { Waiting } from "@interfaces/waiting";
+
+export const dummyWaitingsResponse: Waiting[] = [
+  {
+    waitingID: 1,
+    waitingStatus: "waiting",
+    waitingTeamsAhead: 5,
+    partySize: 4,
+    user: {
+      userID: "u001",
+      name: "John Smith",
+      phoneNumber: "010-1234-5678",
+    },
+    confirmRemainingTime: undefined,
+    arrivalRemainingTime: undefined,
+    registeredAt: "2024-09-29T12:00:00Z",
+  },
+  {
+    waitingID: 2,
+    waitingStatus: "ready_to_confirm",
+    waitingTeamsAhead: 0,
+    partySize: 6,
+    user: {
+      userID: "u002",
+      name: "Jane Doe",
+      phoneNumber: "010-9876-5432",
+    },
+    confirmRemainingTime: "2024-10-01T14:45:00Z",
+    arrivalRemainingTime: undefined,
+    registeredAt: "2024-09-29T12:05:00Z",
+  },
+  {
+    waitingID: 3,
+    waitingStatus: "confirmed",
+    waitingTeamsAhead: 1,
+    partySize: 2,
+    user: {
+      userID: "u003",
+      name: "Alice Kim",
+      phoneNumber: "010-2222-3333",
+    },
+    confirmRemainingTime: "2024-10-01T15:00:00Z",
+    arrivalRemainingTime: "2024-10-01T15:05:00Z",
+    registeredAt: "2024-09-29T12:10:00Z",
+  },
+  {
+    waitingID: 4,
+    waitingStatus: "waiting",
+    waitingTeamsAhead: 4,
+    partySize: 3,
+    user: {
+      userID: "u004",
+      name: "Bob Lee",
+      phoneNumber: "010-4444-5555",
+    },
+    confirmRemainingTime: undefined,
+    arrivalRemainingTime: undefined,
+    registeredAt: "2024-09-29T12:15:00Z",
+  },
+  {
+    waitingID: 5,
+    waitingStatus: "confirmed",
+    waitingTeamsAhead: 0,
+    partySize: 2,
+    user: {
+      userID: "u005",
+      name: "Charlie Park",
+      phoneNumber: "010-6666-7777",
+    },
+    confirmRemainingTime: "2024-10-01T15:20:00Z",
+    arrivalRemainingTime: "2024-10-01T15:25:00Z",
+    registeredAt: "2024-09-29T12:20:00Z",
+  },
+  {
+    waitingID: 6,
+    waitingStatus: "waiting",
+    waitingTeamsAhead: 3,
+    partySize: 5,
+    user: {
+      userID: "u006",
+      name: "David Choi",
+      phoneNumber: "010-8888-9999",
+    },
+    confirmRemainingTime: undefined,
+    arrivalRemainingTime: undefined,
+    registeredAt: "2024-09-29T12:25:00Z",
+  },
+];
