@@ -1,5 +1,6 @@
 // styles
 import { GlobalStyle, theme } from "@linenow/design-system";
+import LocalStyle from "@styles/local";
 import { ThemeProvider } from "styled-components";
 
 // components
@@ -11,10 +12,10 @@ import router from "./routes/router";
 
 // react-query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import LocalStyle from "@styles/local";
 
 function App() {
   const queryClient = new QueryClient();
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
