@@ -2,14 +2,31 @@ import { Button, InputPassword } from '@linenow/system';
 import * as S from './LoginPage.styled';
 import LogoImg from '../../../public/icons/logo.svg';
 import { useState } from 'react';
+import { postLogin } from '@apis/domains/login/apis';
+import { useNavigate } from 'react-router-dom';
 
 const MAX_LENGTH = 20;
 
 const LoginPage = () => {
   const [inputValue, setInputValue] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+  };
+
+  const handleLogin = async () => {
+    try {
+      const accessToken = await postLogin({ id: inputValue });
+
+      if (accessToken) {
+        navigate('/');
+      } else {
+        alert('등록되지 않은 고유번호입니다.');
+      }
+    } catch (error) {
+      alert('등록되지 않은 고유번호입니다.');
+    }
   };
 
   return (
@@ -31,7 +48,9 @@ const LoginPage = () => {
               </S.LoginBoxInputCount>
             </S.LoginBoxInputWrapper>
           </S.LoginBoxContent>
-          <Button width={'18.1875rem'}>로그인</Button>
+          <Button width={'18.1875rem'} onClick={handleLogin}>
+            로그인
+          </Button>
         </S.LoginBoxWrapper>
       </S.LoginWrapper>
     </>
