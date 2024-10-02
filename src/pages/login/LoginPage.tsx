@@ -20,6 +20,7 @@ const LoginPage = () => {
       const accessToken = await postLogin({ id: inputValue });
 
       if (accessToken) {
+        localStorage.setItem('accessToken', accessToken);
         navigate('/');
       } else {
         alert('등록되지 않은 고유번호입니다.');
@@ -48,7 +49,7 @@ const LoginPage = () => {
               </S.LoginBoxInputCount>
             </S.LoginBoxInputWrapper>
           </S.LoginBoxContent>
-          <Button width={'18.1875rem'} onClick={handleLogin}>
+          <Button width={'20.6875rem'} onClick={handleLogin}>
             로그인
           </Button>
         </S.LoginBoxWrapper>
