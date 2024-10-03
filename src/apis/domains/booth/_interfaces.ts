@@ -2,7 +2,7 @@ import { Waiting } from "@interfaces/waiting";
 import { WaitingStatus } from "@linenow-types/status";
 
 export interface GetWaitingResponse {
-  waiting_id: number;
+  id: number;
   waiting_status: WaitingStatus;
 
   party_size: number;
@@ -31,7 +31,7 @@ export const transformGetWaitingResponse = (
   response: GetWaitingResponse
 ): Waiting => {
   return {
-    waitingID: response.waiting_id,
+    waitingID: response.id,
     waitingStatus: response.waiting_status,
 
     partySize: response.party_size,
