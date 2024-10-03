@@ -9,13 +9,13 @@ const Sidebar = () => {
   const { openModal, closeModal } = useModal();
 
   const handleLogout = async () => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = sessionStorage.getItem('accessToken');
 
     if (accessToken) {
       const result = await postLogout({ accessToken });
 
       if (result) {
-        localStorage.removeItem('accessToken');
+        sessionStorage.removeItem('accessToken');
         closeModal();
         navigate('/login');
       } else {

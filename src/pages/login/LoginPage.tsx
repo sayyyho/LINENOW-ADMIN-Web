@@ -20,7 +20,7 @@ const LoginPage = () => {
       const accessToken = await postLogin({ id: inputValue });
 
       if (accessToken) {
-        localStorage.setItem('accessToken', accessToken);
+        sessionStorage.setItem('accessToken', accessToken);
         navigate('/');
       } else {
         alert('등록되지 않은 고유번호입니다.');
