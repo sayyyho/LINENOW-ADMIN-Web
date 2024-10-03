@@ -1,7 +1,7 @@
-import { delay, http, HttpResponse } from "msw";
+import { delay, http, HttpResponse } from 'msw';
 
 //dummy
-import { dummyWaitingsResponse } from "./dummy/waitings";
+import { dummyWaitingsResponse } from './dummy/waitings';
 
 const COMMON_DELAY = 0;
 
@@ -14,7 +14,50 @@ const getDelayedResponse = (responseData: any) => {
 
 export const handlers = [
   http.get(
-    "/api/v1/manager/booths/booth_id/waitings",
+    '/api/v1/manager/booths/booth_id/waitings',
     getDelayedResponse(dummyWaitingsResponse)
   ),
+
+  // POST 로그인 API 테스트용
+  http.post('/api/v1/manager/login', async ({ request }) => {
+    const data = {
+      accessToken: '123456789',
+    };
+
+    const result: any = await request.json();
+    const id = result?.id;
+
+    // 고유번호가 '12345'일 경우 성공
+    if (id === '12345') {
+      return new HttpResponse(JSON.stringify(data), {
+        status: 200,
+      });
+    } else {
+      return new HttpResponse(null, {
+        status: 400,
+        statusText: 'fail',
+      });
+    }
+  }),
+
+  // POST 로그아웃 API 테스트용
+  http.post('/api/v1/manager/logout', async ({ request }) => {
+    // 로그아웃 시 로컬 스토리지에서 토큰을 삭제한다고 가정
+    const accessToken = sessionStorage.getItem('accessToken');
+
+    // 토큰이 존재할 경우 로그아웃 성공 처리
+    if (accessToken) {
+      return new HttpResponse(
+        JSON.stringify({ message: 'Logout successful' }),
+        {
+          status: 200,
+        }
+      );
+    } else {
+      return new HttpResponse(null, {
+        status: 400,
+        statusText: 'Logout failed',
+      });
+    }
+  }),
 ];
