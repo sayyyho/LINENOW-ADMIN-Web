@@ -1,4 +1,9 @@
 import axios, { AxiosError } from 'axios';
+import {
+  LogoutRequest,
+  LogoutResponse,
+  TransformedLogoutResponse,
+} from './domains/logout/_interfaces';
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -19,10 +24,11 @@ export const getResponse = async <T>(url: string): Promise<T | null> => {
 
 export const postResponse = async <T>(
   url: string,
-  data: any
+  data: any,
+  headers?: Record<string, string>
 ): Promise<T | null> => {
   try {
-    const response = await instance.post<T>(url, data);
+    const response = await instance.post<T>(url, data, { headers });
     return response.data;
   } catch (error) {
     const axiosError = error as AxiosError;
