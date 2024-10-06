@@ -20,7 +20,6 @@ export const usePostLogout = () => {
       closeModal();
     },
     onError: () => {
-      // logout();
       setLoadings({ isFullLoading: false });
       alert("로그아웃 중 오류가 발생했어요.\n다시 시도해주세요.");
     },
@@ -47,7 +46,7 @@ export const usePostLogin = () => {
     },
     onError: () => {
       setLoadings({ isFullLoading: false });
-      alert("로그인 중 오류가 발생했어요.\n다시 시도해주세요.");
+      alert("잘못된 고유번호 입니다.\n다시 입력해주세요.");
     },
   });
 };
