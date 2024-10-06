@@ -2,11 +2,13 @@ import { postResponse } from '@apis/instance';
 import {
   LoginRequest,
   LoginResponse,
+  TransformedLoginResponse,
   transformLoginResponse,
 } from './_interfaces';
 
-// post login: 로그인 API 호출
-export const postLogin = async (data: LoginRequest): Promise<string | null> => {
+export const postLogin = async (
+  data: LoginRequest
+): Promise<TransformedLoginResponse | null> => {
   const response = await postResponse<LoginResponse>(
     '/api/v1/manager/login',
     data

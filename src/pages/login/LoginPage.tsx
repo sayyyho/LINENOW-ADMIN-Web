@@ -16,11 +16,17 @@ const LoginPage = () => {
   };
 
   const handleLogin = async () => {
-    try {
-      const accessToken = await postLogin({ id: inputValue });
+    if (!inputValue.trim()) {
+      alert('고유번호를 입력해주세요.');
+      return;
+    }
 
-      if (accessToken) {
-        sessionStorage.setItem('accessToken', accessToken);
+    try {
+      const response = await postLogin({ admin_code: inputValue });
+
+      if (response) {
+        sessionStorage.setItem('accessToken', response.accessToken);
+        sessionStorage.setItem('refreshToken', response.refreshToken);
         navigate('/');
       } else {
         alert('등록되지 않은 고유번호입니다.');
