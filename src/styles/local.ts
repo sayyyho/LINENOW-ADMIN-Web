@@ -7,6 +7,9 @@ const LocalStyle = createGlobalStyle`
         -webkit-touch-callout: none;
         -webkit-tap-highlight-color:rgb(0 0 0 / 0%);
         scroll-behavior: smooth; 
+        @media (max-width: 360px) {
+		font-size:12px;
+	}
     }
 
     .root {

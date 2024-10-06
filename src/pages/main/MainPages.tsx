@@ -57,7 +57,7 @@ const MainPage = () => {
     setCallingCount(callingCount || 0);
     setArrivedCount(arrivedCount || 0);
     setCanceledCount(canceledCount || 0);
-  });
+  }, []);
 
   if (isLoading) {
     return (
@@ -77,9 +77,11 @@ const MainPage = () => {
         canceledCount={canceledCount}
       />
       <S.MainWaitingCardList>
-        {waitings?.map((item, index) => (
-          <MainWaitingCard key={index} waiting={item} />
-        ))}
+        <S.MainWaitingCardListScorll>
+          {waitings?.map((item, index) => (
+            <MainWaitingCard key={index} waiting={item} />
+          ))}
+        </S.MainWaitingCardListScorll>
       </S.MainWaitingCardList>
     </>
   );

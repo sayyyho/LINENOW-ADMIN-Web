@@ -1,4 +1,4 @@
-import { GlobalStyle, Modal, theme } from "@linenow/system";
+import { GlobalStyle, theme } from "@linenow/system";
 
 // styles
 import LocalStyle from "@styles/local";
@@ -18,7 +18,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <Modal />
         <FullSpinner />
         <GlobalStyle />
         <LocalStyle />

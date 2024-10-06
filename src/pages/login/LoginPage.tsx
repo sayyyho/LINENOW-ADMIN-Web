@@ -33,12 +33,9 @@ const LoginPage = () => {
                 onChange={handleChange}
                 maxLength={MAX_LENGTH}
               />
-              <S.LoginBoxInputCount>
-                {inputValue.length}/{MAX_LENGTH}
-              </S.LoginBoxInputCount>
             </S.LoginBoxInputWrapper>
           </S.LoginBoxContent>
-          <Button width={"20.6875rem"} onClick={handleLogin}>
+          <Button width={"18rem"} onClick={handleLogin}>
             로그인
           </Button>
         </S.LoginBoxWrapper>
