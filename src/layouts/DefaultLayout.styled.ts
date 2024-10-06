@@ -7,6 +7,8 @@ export const DefaultLayoutGrid = styled.section`
   height: 100vh;
 `;
 export const DefaultLayoutOutletWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
   grid-row: 2 / 3;
   overflow-y: scroll;
 
