@@ -26,6 +26,7 @@ export const usePostWaitingAction = () => {
       postWaitingsAction(waitingID, requestBody),
     onSuccess: () => {
       closeModal();
+      history.go(0); // 새로고침
     },
     onError: (error) => {
       alert("처리중 오류가 발생했어요.\n다시 시도해주세요");

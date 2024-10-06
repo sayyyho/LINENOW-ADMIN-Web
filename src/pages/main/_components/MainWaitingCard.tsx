@@ -36,6 +36,22 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
     targetTime: waiting.arrivalRemainingTime,
   });
 
+  const formatDate = (isoDate: string): string => {
+    const date = new Date(isoDate);
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // 월은 0부터 시작하므로 +1
+    const day = date.getDate();
+
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    const ampm = hours >= 12 ? "오후" : "오전";
+
+    const formattedHours = hours === 0 ? 12 : hours > 12 ? hours - 12 : hours;
+
+    return `${ampm} ${formattedHours}시 ${minutes}분 · ${year}년 ${month}월 ${day}일`;
+  };
+
   return (
     <S.MainWaitingCardWrapper
       $backgroundColor={config.backgroundColor}
@@ -46,7 +62,9 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
           <span className="waitingID">
             {waiting.waitingID.toString().padStart(3, "0")}
           </span>
-          <span className="waitingTime">{waiting.registeredAt}</span>
+          <span className="waitingTime">
+            {formatDate(waiting.registeredAt)}
+          </span>
 
           {config.isValidate ? (
             <CommonButton onClick={handleCancelWaitingButton}>

@@ -9,3 +9,10 @@ export type WaitingStatus =
 export type ManagerActionStatus = "call" | "confirm" | "cancel";
 
 export type BoothStatus = "not_started" | "operating" | "finished" | "paused";
+
+export type WaitingStatusParams =
+  | "calling"
+  | "waiting"
+  | "arrived"
+  | "canceled"
+  | undefined;
