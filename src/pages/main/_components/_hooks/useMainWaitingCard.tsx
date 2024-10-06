@@ -76,7 +76,7 @@ export const useMainWaitingCard = ({
         children: "손님이 입장을 확정중이에요",
         scheme: "limeLight",
       },
-      secondButton: approveWaitingButton(true),
+      secondButton: approveWaitingButton(false),
     },
 
     confirmed: {
@@ -108,6 +108,17 @@ export const useMainWaitingCard = ({
       isValidate: false,
       primaryButton: {
         children: "대기가 취소되었어요",
+        scheme: "grayLight",
+        disabled: true,
+      },
+      partySizeColor: "grayLight",
+    },
+
+    time_over_canceled: {
+      backgroundColor: "grayLight",
+      isValidate: false,
+      primaryButton: {
+        children: "대기 시간이 초과되었어요",
         scheme: "grayLight",
         disabled: true,
       },

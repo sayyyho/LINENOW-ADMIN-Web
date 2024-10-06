@@ -3,7 +3,8 @@ export type WaitingStatus =
   | "ready_to_confirm"
   | "confirmed"
   | "arrived"
-  | "canceled";
+  | "canceled"
+  | "time_over_canceled";
 
 export type ManagerActionStatus = "call" | "confirm" | "cancel";
 

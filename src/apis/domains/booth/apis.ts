@@ -13,6 +13,7 @@ export const getWaitings = async (): Promise<Waiting[]> => {
   const response = await getResponse<GetWaitingsResponse>(
     `/api/v1/manager/waitings`
   );
+  console.log(response);
   return response ? transformGetWaitingsResponse(response) : []; // 변환 후 반환
 };
 

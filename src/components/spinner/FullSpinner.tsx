@@ -4,11 +4,16 @@ import * as S from "./Spinner.styled";
 
 const FullSpinner = () => {
   const { loadings } = useIsLoading();
-  return loadings.isFullLoading ? (
-    <S.SpinnerBackground>
-      <Spinner />
-    </S.SpinnerBackground>
-  ) : null;
+
+  if (loadings.isFullLoading) {
+    return (
+      <S.SpinnerBackground>
+        <Spinner />
+      </S.SpinnerBackground>
+    );
+  }
+
+  return null;
 };
 
 export default FullSpinner;

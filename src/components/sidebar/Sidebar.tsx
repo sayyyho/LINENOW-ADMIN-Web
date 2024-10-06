@@ -16,6 +16,7 @@ import { useGetBoothStatus } from "@hooks/apis/boothManaging";
 import { useEffect } from "react";
 import useIsLoading from "@hooks/useIsLoading";
 import { usePostLogout } from "@hooks/apis/auth";
+import Spinner from "@components/spinner/Spinner";
 
 const Sidebar = () => {
   const { setLoadings } = useIsLoading();
@@ -23,9 +24,8 @@ const Sidebar = () => {
   const { mutate: postLogout, isPending } = usePostLogout();
 
   useEffect(() => {
-    setLoadings({ isFullLoading: isLoading });
     setBoothInfo(boothData || { boothID: 0, name: "", status: "not_started" });
-  }, [isLoading]);
+  }, [boothData]);
 
   useEffect(() => {
     setLoadings({ isFullLoading: isPending });
@@ -159,15 +159,21 @@ const Sidebar = () => {
   return (
     <S.SidebarWrapper>
       <S.SidebarUserInfoWapper>
-        <h3>안녕하세요</h3>
-        <h1>
-          <span className="lime">{boothInfo?.name}</span> 님
-        </h1>
-        <CommonButton>
-          <S.SidebarLogout onClick={handleLogoutClick}>
-            로그아웃
-          </S.SidebarLogout>
-        </CommonButton>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <h3>안녕하세요</h3>
+            <h1>
+              <span className="lime">{boothInfo?.name}</span> 님
+            </h1>
+            <CommonButton>
+              <S.SidebarLogout onClick={handleLogoutClick}>
+                로그아웃
+              </S.SidebarLogout>
+            </CommonButton>
+          </>
+        )}
       </S.SidebarUserInfoWapper>
 
       <S.SidebarButtonWrapper>

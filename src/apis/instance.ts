@@ -43,6 +43,9 @@ export const getResponse = async <T>(url: string): Promise<T | null> => {
     const axiosError = error as AxiosError;
     console.log(`[GET] ${url}`);
     console.error("Response error:", axiosError);
+    if (axiosError.status == 504) {
+      location.href = "/error";
+    }
     return null;
   }
 };

@@ -10,6 +10,7 @@ import MainWaitingCard from "./_components/MainWaitingCard";
 import * as S from "./MainPage.styled";
 import TagList from "./_components/tag/TagList";
 import { Waiting } from "@interfaces/waiting";
+import Spinner from "@components/spinner/Spinner";
 
 const MainPage = () => {
   const [selectedTag, setSelectedTag] = useState<string>("전체보기");
@@ -21,7 +22,7 @@ const MainPage = () => {
   const [canceledCount, setCanceledCount] = useState<number>(0);
 
   // API hooks
-  const { data: waitingsData, refetch: refetchWaitings } = useGetWaitings();
+  const { refetch: refetchWaitings } = useGetWaitings();
   const { refetch: refetchWaiting } = useGetWaiting();
   const { refetch: refetchCalling } = useGetCalling();
   const { refetch: refetchArrived } = useGetArrived();
@@ -91,10 +92,14 @@ const MainPage = () => {
     });
   };
 
-  return isLoading ? (
-    //추후 spinner 있으면 넣기
-    <div>로딩 중...</div>
-  ) : (
+  if (isLoading) {
+    return (
+      <div style={{ display: "flex", height: "100%" }}>
+        <Spinner />
+      </div>
+    );
+  }
+  return (
     <>
       <TagList
         selectedTag={selectedTag}
