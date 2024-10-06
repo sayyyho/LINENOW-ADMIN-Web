@@ -31,7 +31,7 @@ export const SidebarUserInfoWapper = styled.section`
     color: ${({ theme }) => theme.colors.font.lime};
   }
 `;
-export const SidebarLogout = styled.button`
+export const SidebarLogout = styled.span`
   margin-top: 1.5rem;
 
   ${({ theme }) => theme.fonts.b3};

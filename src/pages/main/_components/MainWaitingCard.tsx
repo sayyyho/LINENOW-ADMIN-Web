@@ -26,7 +26,6 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
   );
 
   const handleCancelWaitingButton = () => {
-    console.log("클릭");
     openModal(cancelWaitingModal(waiting.user.name));
   };
 

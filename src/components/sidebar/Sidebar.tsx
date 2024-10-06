@@ -11,9 +11,23 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import SidebarButton, { SidebarButtonProps } from "./SidebarButton";
 
+import useSidebarModalConfig from "./useSidebarModalConfig";
+import useBoothInfo from "@hooks/useBoothInfo";
+import { useGetBoothStatus } from "@hooks/apis/boothManaging";
+
 const Sidebar = () => {
+  const { isLoading } = useGetBoothStatus();
+  const { boothInfo } = useBoothInfo();
+
   const navigate = useNavigate();
   const { openModal, closeModal } = useModal();
+
+  const {
+    startBoothModal,
+    stopBoothModal,
+    startWaitingModal,
+    stopWaitingModal,
+  } = useSidebarModalConfig();
 
   const handleLogout = async () => {
     const refreshToken = sessionStorage.getItem("refreshToken");
@@ -66,9 +80,36 @@ const Sidebar = () => {
     },
   ];
 
+  const RequireStartingButton = () => {
+    return (
+      <Button
+        scheme="blue"
+        disabled={true}
+        style={{ backgroundColor: "#333740", color: "#656972" }}
+      >
+        운영 시작을 해주세요!
+      </Button>
+    );
+  };
+
+  const handleStopWaitingButtonClick = () => {
+    openModal(stopWaitingModal());
+  };
+
+  const handleStartWaitingButtonClick = () => {
+    openModal(startWaitingModal());
+  };
+
+  const handleStopBoothButtonClick = () => {
+    openModal(stopBoothModal());
+  };
+
+  const handleStartBoothButtonClick = () => {
+    openModal(startBoothModal());
+  };
   const StopWaitingButton = () => {
     return (
-      <Button scheme="blueLight">
+      <Button scheme="blueLight" onClick={handleStopWaitingButtonClick}>
         대기 중지하기 <Icon name={"pause_blue"} size={"1.5rem"} />
       </Button>
     );
@@ -76,7 +117,7 @@ const Sidebar = () => {
 
   const StartWaitingButton = () => {
     return (
-      <Button scheme="blue">
+      <Button scheme="blue" onClick={handleStartWaitingButtonClick}>
         대기 재개하기 <Icon name={"play_white"} size={"1.5rem"} />
       </Button>
     );
@@ -84,24 +125,41 @@ const Sidebar = () => {
 
   const StopBoothButton = () => {
     return (
-      <Button scheme="limeLight">
+      <Button scheme="limeLight" onClick={handleStopBoothButtonClick}>
         운영 종료하기 <Icon name={"open_gary"} size={"1.5rem"} />
       </Button>
     );
   };
 
-  const startBoothButton = () => {
-    <Button scheme="lime">
-      운영 시작하기 <Icon name={"open_gary"} size={"1.5rem"} />
-    </Button>;
+  const StartBoothButton = () => {
+    return (
+      <Button scheme="lime" onClick={handleStartBoothButtonClick}>
+        운영 시작하기 <Icon name={"open_gary"} size={"1.5rem"} />
+      </Button>
+    );
   };
 
+  const getButton = () => {
+    switch (boothInfo?.status) {
+      case "not_started":
+        return [
+          <RequireStartingButton key={1} />,
+          <StartBoothButton key={2} />,
+        ];
+      case "operating":
+        return [<StopWaitingButton key={1} />, <StopBoothButton key={2} />];
+      case "paused":
+        return [<StartWaitingButton key={1} />, <StopBoothButton key={2} />];
+      case "finished":
+        return null;
+    }
+  };
   return (
     <S.SidebarWrapper>
       <S.SidebarUserInfoWapper>
         <h3>안녕하세요</h3>
         <h1>
-          <span className="lime">라인나우</span> 님
+          <span className="lime">{boothInfo?.name}</span> 님
         </h1>
         <CommonButton>
           <S.SidebarLogout onClick={handleLogoutClick}>
@@ -120,7 +178,9 @@ const Sidebar = () => {
         $col={1}
         $colGap="0.5rem"
         style={{ padding: `1.25rem 0.75rem 2rem 0.75rem` }}
-      ></ButtonLayout>
+      >
+        {getButton()}
+      </ButtonLayout>
     </S.SidebarWrapper>
   );
 };
