@@ -44,7 +44,7 @@ const useSidebarModalConfig = () => {
       children: "대기 중지하기",
       onClick: () => {
         postBoothOperation({
-          status: "paused",
+          status: "pause",
         });
       },
     },

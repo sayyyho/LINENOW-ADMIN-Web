@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const LoginWrapper = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ export const LoginBoxSubTitle = styled.h3`
   color: ${({ theme }) => theme.colors.font.blue};
 `;
 
-export const LoginBoxInputCount = styled.caption`
+export const LoginBoxInputCount = styled.span`
   ${({ theme }) => theme.fonts.caption};
   display: flex;
   justify-content: flex-end;

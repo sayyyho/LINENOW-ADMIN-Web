@@ -15,16 +15,16 @@ export const SidebarUserInfoWapper = styled.section`
   flex-direction: column;
   align-items: start;
 
-  gap: 0.25rem;
-
   padding: 2rem 1.25rem 2.25rem 1.25rem;
 
   h3 {
     ${({ theme }) => theme.fonts.h3};
+    padding-bottom: 0.25rem;
   }
 
   h1 {
     ${({ theme }) => theme.fonts.h1};
+    padding-bottom: 1.5rem;
   }
 
   .lime {

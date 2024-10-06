@@ -1,39 +1,24 @@
-import { Button, InputPassword } from '@linenow/system';
-import * as S from './LoginPage.styled';
-import LogoImg from '../../../public/icons/logo.svg';
-import { useState } from 'react';
-import { postLogin } from '@apis/domains/login/apis';
-import { useNavigate } from 'react-router-dom';
+import { Button, InputPassword } from "@linenow/system";
+import * as S from "./LoginPage.styled";
+import LogoImg from "../../../public/icons/logo.svg";
+import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+import useAuth from "@hooks/useAuth";
+import { usePostLogin } from "@hooks/apis/auth";
 
 const MAX_LENGTH = 20;
 
 const LoginPage = () => {
-  const [inputValue, setInputValue] = useState('');
-  const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState("");
 
+  const { mutate: postLogin } = usePostLogin();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
   };
 
-  const handleLogin = async () => {
-    if (!inputValue.trim()) {
-      alert('고유번호를 입력해주세요.');
-      return;
-    }
-
-    try {
-      const response = await postLogin({ admin_code: inputValue });
-
-      if (response) {
-        sessionStorage.setItem('accessToken', response.accessToken);
-        sessionStorage.setItem('refreshToken', response.refreshToken);
-        navigate('/');
-      } else {
-        alert('등록되지 않은 고유번호입니다.');
-      }
-    } catch (error) {
-      alert('등록되지 않은 고유번호입니다.');
-    }
+  const handleLogin = () => {
+    postLogin({ adminCode: inputValue });
   };
 
   return (
@@ -55,7 +40,7 @@ const LoginPage = () => {
               </S.LoginBoxInputCount>
             </S.LoginBoxInputWrapper>
           </S.LoginBoxContent>
-          <Button width={'20.6875rem'} onClick={handleLogin}>
+          <Button width={"20.6875rem"} onClick={handleLogin}>
             로그인
           </Button>
         </S.LoginBoxWrapper>

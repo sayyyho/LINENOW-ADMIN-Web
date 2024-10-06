@@ -150,7 +150,7 @@ export const handlers = [
     );
   }),
 
-  http.post("/api/v1/manager/booth/paused", async () => {
+  http.post("/api/v1/manager/booth/pause", async () => {
     return new HttpResponse(
       JSON.stringify({
         status: "success",

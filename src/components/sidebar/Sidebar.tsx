@@ -1,6 +1,5 @@
 import * as S from "./Sidebar.styled";
 
-import { postLogout } from "@apis/domains/logout/apis";
 import {
   Button,
   ButtonLayout,
@@ -8,18 +7,32 @@ import {
   Icon,
   useModal,
 } from "@linenow/system";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import SidebarButton, { SidebarButtonProps } from "./SidebarButton";
 
 import useSidebarModalConfig from "./useSidebarModalConfig";
 import useBoothInfo from "@hooks/useBoothInfo";
 import { useGetBoothStatus } from "@hooks/apis/boothManaging";
+import { useEffect } from "react";
+import useIsLoading from "@hooks/useIsLoading";
+import { usePostLogout } from "@hooks/apis/auth";
 
 const Sidebar = () => {
-  const { isLoading } = useGetBoothStatus();
-  const { boothInfo } = useBoothInfo();
+  const { setLoadings } = useIsLoading();
+  const { data: boothData, isLoading } = useGetBoothStatus();
+  const { mutate: postLogout, isPending } = usePostLogout();
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    setLoadings({ isFullLoading: isLoading });
+    setBoothInfo(boothData || { boothID: 0, name: "", status: "not_started" });
+  }, [isLoading]);
+
+  useEffect(() => {
+    setLoadings({ isFullLoading: isPending });
+  }, [isPending]);
+
+  const { boothInfo, setBoothInfo } = useBoothInfo();
+
   const { openModal, closeModal } = useModal();
 
   const {
@@ -30,22 +43,7 @@ const Sidebar = () => {
   } = useSidebarModalConfig();
 
   const handleLogout = async () => {
-    const refreshToken = sessionStorage.getItem("refreshToken");
-
-    if (refreshToken) {
-      const result = await postLogout({ refresh_token: refreshToken });
-
-      if (result) {
-        sessionStorage.removeItem("accessToken");
-        sessionStorage.removeItem("refreshToken");
-        closeModal();
-        navigate("/login");
-      } else {
-        // console.log('Logout failed');
-      }
-    } else {
-      // console.log('No refreshToken found');
-    }
+    postLogout();
   };
 
   const logoutModalProps = {
@@ -140,6 +138,10 @@ const Sidebar = () => {
   };
 
   const getButton = () => {
+    if (isLoading) {
+      return null;
+    }
+
     switch (boothInfo?.status) {
       case "not_started":
         return [

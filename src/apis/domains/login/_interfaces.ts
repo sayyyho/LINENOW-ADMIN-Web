@@ -1,27 +1,17 @@
+import { AuthProps } from "@atoms/auth";
+
 export interface LoginRequest {
   admin_code: string; // 고유번호
 }
 
 export interface LoginResponse {
-  data: {
-    booth_name: string;
-    access_token: string;
-    refresh_token: string;
-  };
+  access_token: string;
+  refresh_token: string;
 }
 
-export interface TransformedLoginResponse {
-  boothName: string;
-  accessToken: string;
-  refreshToken: string;
-}
-
-export const transformLoginResponse = (
-  response: LoginResponse
-): TransformedLoginResponse => {
+export const transformLoginResponse = (response: LoginResponse): AuthProps => {
   return {
-    boothName: response.data.booth_name,
-    accessToken: response.data.access_token,
-    refreshToken: response.data.refresh_token,
+    accessToken: response.access_token,
+    refreshToken: response.refresh_token,
   };
 };
