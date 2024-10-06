@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@linenow/system": "^0.0.2",
+    "@linenow/system": "^0.0.3",
     "@tanstack/react-query": "^5.56.2",
     "axios": "^1.7.7",
     "jotai": "^2.10.0",
