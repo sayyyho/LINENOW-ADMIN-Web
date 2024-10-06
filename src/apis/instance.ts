@@ -1,12 +1,13 @@
 import axios, { AxiosError } from "axios";
 
 const instance = axios.create({
-  baseURL: "",
+  // baseURL: "",
+  baseURL: import.meta.env.VITE_BASE_URL,
   withCredentials: false, //크로스 도메인 요청 시 쿠키, HTTP 인증 및 클라이언트 SSL 인증서를 사용하도록 허용한다.
 });
 
 instance.interceptors.request.use((config) => {
-  const accessToken = sessionStorage.getItem("accessToken");
+  const accessToken = localStorage.getItem("accessToken");
 
   if (accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`;
@@ -42,17 +43,21 @@ export const getResponse = async <T>(url: string): Promise<T | null> => {
     const axiosError = error as AxiosError;
     console.log(`[GET] ${url}`);
     console.error("Response error:", axiosError);
+    if (axiosError.status == 504) {
+      location.href = "/error";
+    }
     return null;
   }
 };
 
-export const postResponse = async <T>(
+export const postResponse = async <TRequest, TResponse>(
   url: string,
-  data: any
-): Promise<T | null> => {
+  data: TRequest
+): Promise<TResponse | null> => {
   try {
-    const response = await instance.post<T>(url, data);
-    return response.data;
+    console.log(`[POST] ${url}`);
+    const response = await instance.post<BaseDTO<TResponse>>(url, data);
+    return response.data.data;
   } catch (error) {
     const axiosError = error as AxiosError;
     console.log(`[POST] ${url} - Data:`, data);
@@ -61,7 +66,10 @@ export const postResponse = async <T>(
   }
 };
 
-export const postNoResponse = async <T>(url: string, requestBody: T) => {
+export const postNoResponse = async <TRequest>(
+  url: string,
+  requestBody: TRequest
+) => {
   try {
     const response = await instance.post<EmptyDTO>(url, requestBody);
 

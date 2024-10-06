@@ -10,6 +10,7 @@ import router from "./routes/router";
 
 // react-query
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import FullSpinner from "@components/spinner/FullSpinner";
 
 function App() {
   const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <Modal />
+        <FullSpinner />
         <GlobalStyle />
         <LocalStyle />
         <RouterProvider router={router} />

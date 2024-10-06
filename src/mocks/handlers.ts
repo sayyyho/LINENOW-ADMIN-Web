@@ -84,7 +84,7 @@ export const handlers = [
   }),
 
   // POST 로그아웃 API 테스트용
-  http.post("/api/v1/manager/logout", async ({ request }) => {
+  http.post("/api/v1/manager/logout", async () => {
     // 로그아웃 시 로컬 스토리지에서 토큰을 삭제한다고 가정
     const accessToken = sessionStorage.getItem("accessToken");
 
@@ -150,7 +150,7 @@ export const handlers = [
     );
   }),
 
-  http.post("/api/v1/manager/booth/paused", async () => {
+  http.post("/api/v1/manager/booth/pause", async () => {
     return new HttpResponse(
       JSON.stringify({
         status: "success",
