@@ -30,6 +30,7 @@ export const FaqQuestionListCardTextWrapper = styled.div`
   align-items: center;
   gap: 0.5rem;
   flex: 1 0 0;
+  cursor: pointer;
 `;
 
 export const FaqQuestionTextQA = styled.article`
@@ -41,6 +42,7 @@ export const FaqQuestionTextMain = styled.article`
   ${({ theme }) => theme.fonts.b2_b}
   color: ${({ theme }) => theme.colors.font.blackLight};
   white-space: pre-line;
+  word-break: keep-all;
 `;
 
 export const FaqAnswerListCard = styled.section`
