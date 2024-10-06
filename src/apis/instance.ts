@@ -38,13 +38,21 @@ export const getResponse = async <T>(url: string): Promise<T | null> => {
       message: ${response.data.message}`
     );
 
+    console.log(response);
     return response.data.data;
   } catch (error) {
     const axiosError = error as AxiosError;
-    console.log(`[GET] ${url}`);
+
     console.error("Response error:", axiosError);
-    if (axiosError.status == 504) {
-      location.href = "/error";
+    if (axiosError.status == 401) {
+      console.log(
+        `[GET] ${url}
+        error: accessToken에 문제가 있습니다.`
+      );
+      // 로그아웃 처리하기
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      history.go(0);
     }
     return null;
   }
