@@ -76,13 +76,18 @@ const MainPage = () => {
         arrivedCount={arrivedCount}
         canceledCount={canceledCount}
       />
-      <S.MainWaitingCardList>
-        <S.MainWaitingCardListScorll>
-          {waitings?.map((item, index) => (
-            <MainWaitingCard key={index} waiting={item} />
-          ))}
-        </S.MainWaitingCardListScorll>
-      </S.MainWaitingCardList>
+
+      {waitings && waitings.length > 0 ? (
+        <S.MainWaitingCardList>
+          <S.MainWaitingCardListScroll>
+            {waitings.map((item, index) => (
+              <MainWaitingCard key={index} waiting={item} />
+            ))}
+          </S.MainWaitingCardListScroll>
+        </S.MainWaitingCardList>
+      ) : (
+        <S.MainNoWaiting>아직 대기가 없어요 :(</S.MainNoWaiting>
+      )}
     </>
   );
 };
