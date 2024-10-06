@@ -3,7 +3,6 @@ import { useGetWaitings } from "@hooks/apis/booth";
 import MainWaitingCard from "./_components/MainWaitingCard";
 import * as S from "./MainPage.styled";
 import TagList from "./_components/tag/TagList";
-import { Waiting } from "@interfaces/waiting";
 import Spinner from "@components/spinner/Spinner";
 import { WaitingStatusParams } from "@linenow-types/status";
 

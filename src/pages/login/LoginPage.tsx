@@ -3,8 +3,6 @@ import * as S from "./LoginPage.styled";
 import LogoImg from "../../../public/icons/logo.svg";
 import { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
-import useAuth from "@hooks/useAuth";
 import { usePostLogin } from "@hooks/apis/auth";
 
 const MAX_LENGTH = 20;

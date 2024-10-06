@@ -118,7 +118,7 @@ export const dummyWaitingResponse = [
 export const dummyCallingResponse = [
   {
     id: 1,
-    waiting_status: "ready_to_confirm" || "confirmed",
+    waiting_status: "confirmed",
     party_size: 4,
     user: {
       user_id: 1,
@@ -131,7 +131,7 @@ export const dummyCallingResponse = [
   },
   {
     id: 2,
-    waiting_status: "ready_to_confirm" || "confirmed",
+    waiting_status: "ready_to_confirm",
     party_size: 6,
     user: {
       user_id: 2,
@@ -144,7 +144,7 @@ export const dummyCallingResponse = [
   },
   {
     id: 3,
-    waiting_status: "ready_to_confirm" || "confirmed",
+    waiting_status: "confirmed",
     party_size: 2,
     user: {
       user_id: 3,
@@ -157,7 +157,7 @@ export const dummyCallingResponse = [
   },
   {
     id: 4,
-    waiting_status: "ready_to_confirm" || "confirmed",
+    waiting_status: "confirmed",
     party_size: 3,
     user: {
       user_id: 4,
@@ -170,7 +170,7 @@ export const dummyCallingResponse = [
   },
   {
     id: 5,
-    waiting_status: "ready_to_confirm" || "confirmed",
+    waiting_status: "confirmed",
     party_size: 2,
     user: {
       user_id: 5,
@@ -183,7 +183,7 @@ export const dummyCallingResponse = [
   },
   {
     id: 6,
-    waiting_status: "ready_to_confirm" || "confirmed",
+    waiting_status: "confirmed",
     party_size: 5,
     user: {
       user_id: 6,
