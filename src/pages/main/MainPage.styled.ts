@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MainWaitingCardListScorll = styled.div`
+export const MainWaitingCardListScroll = styled.div`
   display: grid;
   column-gap: 1.5rem;
   row-gap: 2.5rem;
@@ -27,4 +27,14 @@ export const MainWaitingCardListScorll = styled.div`
 export const MainWaitingCardList = styled.section`
   flex-grow: 1;
   overflow-y: scroll;
+`;
+
+export const MainNoWaiting = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: ${({ theme }) => theme.colors.font.white};
+  ${({ theme }) => theme.fonts.h1}
 `;
