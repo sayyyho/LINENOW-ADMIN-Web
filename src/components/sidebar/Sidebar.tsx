@@ -9,20 +9,21 @@ const Sidebar = () => {
   const { openModal, closeModal } = useModal();
 
   const handleLogout = async () => {
-    const accessToken = sessionStorage.getItem('accessToken');
+    const refreshToken = sessionStorage.getItem('refreshToken');
 
-    if (accessToken) {
-      const result = await postLogout({ accessToken });
+    if (refreshToken) {
+      const result = await postLogout({ refresh_token: refreshToken });
 
       if (result) {
         sessionStorage.removeItem('accessToken');
+        sessionStorage.removeItem('refreshToken');
         closeModal();
         navigate('/login');
       } else {
         // console.log('Logout failed');
       }
     } else {
-      // console.log('No accessToken found');
+      // console.log('No refreshToken found');
     }
   };
 

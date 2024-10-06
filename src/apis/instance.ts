@@ -1,8 +1,18 @@
 import axios, { AxiosError } from 'axios';
 
 const instance = axios.create({
-  baseURL: '',
+  baseURL: import.meta.env.VITE_BASE_URL,
   withCredentials: false, //크로스 도메인 요청 시 쿠키, HTTP 인증 및 클라이언트 SSL 인증서를 사용하도록 허용한다.
+});
+
+instance.interceptors.request.use(config => {
+  const accessToken = sessionStorage.getItem('accessToken');
+
+  if (accessToken) {
+    config.headers.Authorization = `Bearer ${accessToken}`;
+  }
+
+  return config;
 });
 
 export const getResponse = async <T>(url: string): Promise<T | null> => {
@@ -25,9 +35,9 @@ export const postResponse = async <T>(
     const response = await instance.post<T>(url, data);
     return response.data;
   } catch (error) {
-    // const axiosError = error as AxiosError;
-    // console.log(`[POST] ${url} - Data:`, data);
-    // console.error('Response error:', axiosError);
+    const axiosError = error as AxiosError;
+    console.log(`[POST] ${url} - Data:`, data);
+    console.error('Response error:', axiosError);
     return null;
   }
 };
