@@ -13,7 +13,7 @@ import { Waiting } from "@interfaces/waiting";
 // components
 import * as S from "./MainWaitingCard.styled";
 import { useMainWaitingCard } from "./_hooks/useMainWaitingCard";
-import { cancelWaitingModal } from "@components/modal/modalConfig";
+import useMainWaitingCardModalConfig from "./_hooks/useMainWaitingCardModalConfig";
 
 interface MainWaitingCardProps {
   waiting: Waiting;
@@ -21,6 +21,9 @@ interface MainWaitingCardProps {
 
 const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
   const { openModal } = useModal();
+  const { cancelWaitingModal } = useMainWaitingCardModalConfig(
+    waiting.waitingID
+  );
 
   const handleCancelWaitingButton = () => {
     console.log("클릭");
@@ -28,6 +31,7 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
   };
 
   const config = useMainWaitingCard({
+    waitingID: waiting.waitingID,
     userName: waiting.user.name,
     waitingStatus: waiting.waitingStatus,
     targetTime: waiting.arrivalRemainingTime,
