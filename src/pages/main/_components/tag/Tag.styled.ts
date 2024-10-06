@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const TagWrapper = styled.div<{ $isSelected?: boolean }>`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
 
   padding: 0.5rem 0.75rem;
@@ -31,4 +32,5 @@ export const TagListWrapper = styled.div`
   width: 100%;
   padding: 1.25rem 2rem 1.5rem 2rem;
   gap: 0.75rem;
+  overflow-x: scroll;
 `;

@@ -18,7 +18,12 @@ import useIsLoading from "@hooks/useIsLoading";
 import { usePostLogout } from "@hooks/apis/auth";
 import Spinner from "@components/spinner/Spinner";
 
-const Sidebar = () => {
+export interface SidebarProps {
+  isMobile: boolean;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}
+const Sidebar = ({ isMobile, isOpen, setIsOpen }: SidebarProps) => {
   const { setLoadings } = useIsLoading();
   const { data: boothData, isLoading } = useGetBoothStatus();
   const { mutate: postLogout, isPending } = usePostLogout();
@@ -156,40 +161,54 @@ const Sidebar = () => {
         return null;
     }
   };
+
+  if (isMobile && !isOpen) {
+    return null;
+  }
+
   return (
-    <S.SidebarWrapper>
-      <S.SidebarUserInfoWapper>
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <>
-            <h3>안녕하세요</h3>
-            <h1>
-              <span className="lime">{boothInfo?.name}</span> 님
-            </h1>
-            <CommonButton>
-              <S.SidebarLogout onClick={handleLogoutClick}>
-                로그아웃
-              </S.SidebarLogout>
-            </CommonButton>
-          </>
-        )}
-      </S.SidebarUserInfoWapper>
+    <>
+      <S.SidebarWrapper>
+        <S.SidebarUserInfoWapper>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              <h3>안녕하세요</h3>
+              <h1>
+                <span className="lime">{boothInfo?.name}</span> 님
+              </h1>
+              <CommonButton>
+                <S.SidebarLogout onClick={handleLogoutClick}>
+                  로그아웃
+                </S.SidebarLogout>
+              </CommonButton>
+            </>
+          )}
+        </S.SidebarUserInfoWapper>
 
-      <S.SidebarButtonWrapper>
-        {navigateList.map((item, index) => {
-          return <SidebarButton {...item} key={index} />;
-        })}
-      </S.SidebarButtonWrapper>
+        <S.SidebarButtonWrapper>
+          {navigateList.map((item, index) => {
+            return <SidebarButton {...item} key={index} />;
+          })}
+        </S.SidebarButtonWrapper>
 
-      <ButtonLayout
-        $col={1}
-        $colGap="0.5rem"
-        style={{ padding: `1.25rem 0.75rem 2rem 0.75rem` }}
-      >
-        {getButton()}
-      </ButtonLayout>
-    </S.SidebarWrapper>
+        <ButtonLayout
+          $col={1}
+          $colGap="0.5rem"
+          style={{ padding: `1.25rem 0.75rem 2rem 0.75rem` }}
+        >
+          {getButton()}
+        </ButtonLayout>
+      </S.SidebarWrapper>
+      {isMobile && isOpen ? (
+        <S.SidebarBackground
+          onClick={() => {
+            setIsOpen(false);
+          }}
+        />
+      ) : null}
+    </>
   );
 };
 

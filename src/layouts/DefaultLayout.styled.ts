@@ -8,6 +8,12 @@ export const DefaultLayoutGrid = styled.section`
 `;
 export const DefaultLayoutOutletWrapper = styled.section`
   grid-row: 2 / 3;
-  grid-column: 2 / 3;
   overflow-y: scroll;
+
+  .tablet & {
+    grid-column: 2 / 3;
+  }
+  .mobile & {
+    grid-column: 1 / 3;
+  }
 `;
