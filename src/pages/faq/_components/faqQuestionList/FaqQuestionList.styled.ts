@@ -17,7 +17,7 @@ export const FaqQuestionListTitle = styled.h2`
 export const FaqQuestionListCard = styled.section`
   display: flex;
   width: 100%;
-  height: 80px;
+  height: 5rem;
   padding: 0.75rem 1rem;
   justify-content: center;
   align-items: center;
@@ -40,12 +40,13 @@ export const FaqQuestionTextQA = styled.article`
 export const FaqQuestionTextMain = styled.article`
   ${({ theme }) => theme.fonts.b2_b}
   color: ${({ theme }) => theme.colors.font.blackLight};
+  white-space: pre-line;
 `;
 
 export const FaqAnswerListCard = styled.section`
   display: flex;
   width: 100%;
-  height: 80px;
+  min-height: 5rem;
   padding: 0.75rem 1rem;
   justify-content: center;
   align-items: center;

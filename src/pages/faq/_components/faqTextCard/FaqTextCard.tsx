@@ -12,7 +12,7 @@ export const FaqTextCard = () => {
       <S.FaqEnableText>
         상담 가능 시간
         <br />
-        평일 10:00 - 20:00
+        평일 10:00 - 22:30
       </S.FaqEnableText>
     </S.FaqTextWrapper>
   );
