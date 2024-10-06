@@ -4,3 +4,5 @@ export type WaitingStatus =
   | "confirmed"
   | "arrived"
   | "canceled";
+
+export type ManagerActionStatus = "call" | "confirm" | "cancel";
