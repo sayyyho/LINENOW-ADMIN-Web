@@ -9,7 +9,11 @@ export const FaqOpenChattingCard = () => {
           1:1 온라인 문의
         </S.FaqOpenChattingCardOnlineText>
       </S.FaqOpenChattingCardOnlineWrapper>
-      <S.FaqOpenChattingKakaoBtn>
+      <S.FaqOpenChattingKakaoBtn
+        onClick={() => {
+          window.location.href = "https://open.kakao.com/o/sDiY4qSg";
+        }}
+      >
         <S.FaqOpenChattingKakaoWrapper>
           <img src="/icons/kakao_kakao.svg" alt="상담아이콘" />
           카카오톡 오픈채팅방 링크

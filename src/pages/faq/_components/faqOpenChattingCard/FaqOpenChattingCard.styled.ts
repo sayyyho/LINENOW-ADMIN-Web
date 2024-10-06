@@ -37,6 +37,8 @@ export const FaqOpenChattingKakaoBtn = styled.button`
   border-radius: 0.5rem;
   background: #fee500;
   ${({ theme }) => theme.fonts.btn};
+
+  cursor: pointer;
   /* 카카오는 디자인 시스템에 없어서 우선 지정색 할당합니다. */
 `;
 
