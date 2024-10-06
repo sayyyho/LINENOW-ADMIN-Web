@@ -9,8 +9,8 @@ export interface GetWaitingResponse {
 
   user: User;
 
-  confirm_remaining_time: string;
-  arrival_remaining_time: string;
+  confirm_due_time: string;
+  arrival_due_time: string;
 
   registered_at: string;
 
@@ -42,8 +42,8 @@ export const transformGetWaitingResponse = (
       name: response.user.name,
     },
 
-    confirmRemainingTime: response.confirm_remaining_time,
-    arrivalRemainingTime: response.arrival_remaining_time,
+    confirmDueTime: response.confirm_due_time,
+    arrivalDueTime: response.arrival_due_time,
 
     registeredAt: response.registered_at,
   };
