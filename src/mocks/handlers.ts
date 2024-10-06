@@ -56,6 +56,11 @@ export const handlers = [
     getDelayedResponse(dummyCanceledResponse)
   ),
 
+  http.get(
+    "/api/v1/manager/booth",
+    getDelayedResponse({ id: 1, name: "레전드라인나우", status: "not_started" })
+  ),
+
   // POST 로그인 API 테스트용
   http.post("/api/v1/manager/login", async ({ request }) => {
     const data = {
@@ -122,4 +127,36 @@ export const handlers = [
       }
     }
   ),
+
+  http.post("/api/v1/manager/booth/status", async () => {
+    // 요청 처리에 따라 적절한 응답 반환 (예: 성공 또는 오류)
+
+    return new HttpResponse(
+      JSON.stringify({
+        status: "success",
+        code: 200,
+        message: "Action processed successfully.",
+      })
+    );
+  }),
+
+  http.post("/api/v1/manager/booth/resume", async () => {
+    return new HttpResponse(
+      JSON.stringify({
+        status: "success",
+        code: 200,
+        message: "Action processed successfully.",
+      })
+    );
+  }),
+
+  http.post("/api/v1/manager/booth/paused", async () => {
+    return new HttpResponse(
+      JSON.stringify({
+        status: "success",
+        code: 200,
+        message: "Action processed successfully.",
+      })
+    );
+  }),
 ];

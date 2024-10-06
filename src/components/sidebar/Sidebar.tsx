@@ -1,24 +1,45 @@
-import * as S from './Sidebar.styled';
+import * as S from "./Sidebar.styled";
 
-import { postLogout } from '@apis/domains/logout/apis';
-import { useModal } from '@linenow/system';
-import { useNavigate } from 'react-router-dom';
+import { postLogout } from "@apis/domains/logout/apis";
+import {
+  Button,
+  ButtonLayout,
+  CommonButton,
+  Icon,
+  useModal,
+} from "@linenow/system";
+import { useLocation, useNavigate } from "react-router-dom";
+import SidebarButton, { SidebarButtonProps } from "./SidebarButton";
+
+import useSidebarModalConfig from "./useSidebarModalConfig";
+import useBoothInfo from "@hooks/useBoothInfo";
+import { useGetBoothStatus } from "@hooks/apis/boothManaging";
 
 const Sidebar = () => {
+  const { isLoading } = useGetBoothStatus();
+  const { boothInfo } = useBoothInfo();
+
   const navigate = useNavigate();
   const { openModal, closeModal } = useModal();
 
+  const {
+    startBoothModal,
+    stopBoothModal,
+    startWaitingModal,
+    stopWaitingModal,
+  } = useSidebarModalConfig();
+
   const handleLogout = async () => {
-    const refreshToken = sessionStorage.getItem('refreshToken');
+    const refreshToken = sessionStorage.getItem("refreshToken");
 
     if (refreshToken) {
       const result = await postLogout({ refresh_token: refreshToken });
 
       if (result) {
-        sessionStorage.removeItem('accessToken');
-        sessionStorage.removeItem('refreshToken');
+        sessionStorage.removeItem("accessToken");
+        sessionStorage.removeItem("refreshToken");
         closeModal();
-        navigate('/login');
+        navigate("/login");
       } else {
         // console.log('Logout failed');
       }
@@ -28,14 +49,14 @@ const Sidebar = () => {
   };
 
   const logoutModalProps = {
-    title: '로그아웃 하시겠습니까?',
-    sub: '언제든지 다시 로그인할 수 있습니다.',
+    title: "로그아웃 하시겠습니까?",
+    sub: "언제든지 다시 로그인할 수 있습니다.",
     primaryButton: {
-      children: '로그아웃',
+      children: "로그아웃",
       onClick: handleLogout,
     },
     secondButton: {
-      children: '취소',
+      children: "취소",
       onClick: closeModal,
     },
   };
@@ -44,10 +65,122 @@ const Sidebar = () => {
     openModal(logoutModalProps);
   };
 
+  const location = useLocation();
+
+  const navigateList: SidebarButtonProps[] = [
+    {
+      isSelected: location.pathname == "/",
+      to: "/",
+      label: "대기 팀 관리",
+    },
+    {
+      isSelected: location.pathname == "/faq",
+      to: "/faq",
+      label: "문의하기",
+    },
+  ];
+
+  const RequireStartingButton = () => {
+    return (
+      <Button
+        scheme="blue"
+        disabled={true}
+        style={{ backgroundColor: "#333740", color: "#656972" }}
+      >
+        운영 시작을 해주세요!
+      </Button>
+    );
+  };
+
+  const handleStopWaitingButtonClick = () => {
+    openModal(stopWaitingModal());
+  };
+
+  const handleStartWaitingButtonClick = () => {
+    openModal(startWaitingModal());
+  };
+
+  const handleStopBoothButtonClick = () => {
+    openModal(stopBoothModal());
+  };
+
+  const handleStartBoothButtonClick = () => {
+    openModal(startBoothModal());
+  };
+  const StopWaitingButton = () => {
+    return (
+      <Button scheme="blueLight" onClick={handleStopWaitingButtonClick}>
+        대기 중지하기 <Icon name={"pause_blue"} size={"1.5rem"} />
+      </Button>
+    );
+  };
+
+  const StartWaitingButton = () => {
+    return (
+      <Button scheme="blue" onClick={handleStartWaitingButtonClick}>
+        대기 재개하기 <Icon name={"play_white"} size={"1.5rem"} />
+      </Button>
+    );
+  };
+
+  const StopBoothButton = () => {
+    return (
+      <Button scheme="limeLight" onClick={handleStopBoothButtonClick}>
+        운영 종료하기 <Icon name={"open_gary"} size={"1.5rem"} />
+      </Button>
+    );
+  };
+
+  const StartBoothButton = () => {
+    return (
+      <Button scheme="lime" onClick={handleStartBoothButtonClick}>
+        운영 시작하기 <Icon name={"open_gary"} size={"1.5rem"} />
+      </Button>
+    );
+  };
+
+  const getButton = () => {
+    switch (boothInfo?.status) {
+      case "not_started":
+        return [
+          <RequireStartingButton key={1} />,
+          <StartBoothButton key={2} />,
+        ];
+      case "operating":
+        return [<StopWaitingButton key={1} />, <StopBoothButton key={2} />];
+      case "paused":
+        return [<StartWaitingButton key={1} />, <StopBoothButton key={2} />];
+      case "finished":
+        return null;
+    }
+  };
   return (
     <S.SidebarWrapper>
-      sidebar
-      <S.SidebarLogout onClick={handleLogoutClick}>로그아웃</S.SidebarLogout>
+      <S.SidebarUserInfoWapper>
+        <h3>안녕하세요</h3>
+        <h1>
+          <span className="lime">{boothInfo?.name}</span> 님
+        </h1>
+        <CommonButton>
+          <S.SidebarLogout onClick={handleLogoutClick}>
+            로그아웃
+          </S.SidebarLogout>
+        </CommonButton>
+      </S.SidebarUserInfoWapper>
+
+      <S.SidebarButtonWrapper>
+        {navigateList.map((item, index) => {
+          return <SidebarButton {...item} key={index} />;
+        })}
+      </S.SidebarButtonWrapper>
+
+      <ButtonLayout
+        $col={1}
+        $colGap="0.5rem"
+        style={{ padding: `1.25rem 0.75rem 2rem 0.75rem` }}
+      >
+        {getButton()}
+      </ButtonLayout>
     </S.SidebarWrapper>
   );
 };
