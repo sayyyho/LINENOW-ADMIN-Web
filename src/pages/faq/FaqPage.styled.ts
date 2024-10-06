@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const FaqWrapper = styled.section`
-  min-height: 100vh;
   display: flex;
   padding: 1.5rem;
   flex-direction: column;
