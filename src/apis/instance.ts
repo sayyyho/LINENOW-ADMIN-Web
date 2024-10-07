@@ -44,7 +44,7 @@ export const getResponse = async <T>(url: string): Promise<T | null> => {
     const axiosError = error as AxiosError;
 
     console.error("Response error:", axiosError);
-    if (axiosError.status == 401) {
+    if (axiosError.status == 401 || axiosError.status == 403) {
       console.log(
         `[GET] ${url}
         error: accessToken에 문제가 있습니다.`

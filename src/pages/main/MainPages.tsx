@@ -6,13 +6,11 @@ import TagList from "./_components/tag/TagList";
 import Spinner from "@components/spinner/Spinner";
 import { WaitingStatusParams } from "@linenow-types/status";
 import { useNavigate } from "react-router-dom";
+import { useGetWaitingsCounts } from "@hooks/apis/boothManaging";
 
 const MainPage = () => {
+  const { data: waitingsCounts } = useGetWaitingsCounts();
   const [selectedTag, setSelectedTag] = useState<string>("전체보기");
-  const [waitingCount, setWaitingCount] = useState<number>(0);
-  const [callingCount, setCallingCount] = useState<number>(0);
-  const [arrivedCount, setArrivedCount] = useState<number>(0);
-  const [canceledCount, setCanceledCount] = useState<number>(0);
 
   const getStatus = (tag: string): WaitingStatusParams => {
     switch (tag) {
@@ -48,29 +46,8 @@ const MainPage = () => {
     if (firstUse === "true") {
       navigate("/onboarding");
     }
-
-    const waitingCount = waitings?.filter(
-      (item) => item.waitingStatus === "waiting"
-    ).length;
-    const callingCount = waitings?.filter(
-      (item) =>
-        item.waitingStatus === "ready_to_confirm" ||
-        item.waitingStatus === "confirmed"
-    ).length;
-    const arrivedCount = waitings?.filter(
-      (item) => item.waitingStatus === "arrived"
-    ).length;
-    const canceledCount =
-      (waitings?.filter((item) => item.waitingStatus === "canceled").length ||
-        0) +
-      (waitings?.filter((item) => item.waitingStatus === "time_over_canceled")
-        .length || 0);
-
-    setWaitingCount(waitingCount || 0);
-    setCallingCount(callingCount || 0);
-    setArrivedCount(arrivedCount || 0);
-    setCanceledCount(canceledCount || 0);
   }, []);
+
 
   if (isLoading) {
     return (
@@ -84,10 +61,7 @@ const MainPage = () => {
       <TagList
         selectedTag={selectedTag}
         onTagClick={handleTagClick}
-        waitingCount={waitingCount}
-        callingCount={callingCount}
-        arrivedCount={arrivedCount}
-        canceledCount={canceledCount}
+        {...waitingsCounts}
       />
 
       {waitings && waitings.length > 0 ? (
@@ -99,7 +73,7 @@ const MainPage = () => {
           </S.MainWaitingCardListScroll>
         </S.MainWaitingCardList>
       ) : (
-        <S.MainNoWaiting>아직 대기가 없어요 :(</S.MainNoWaiting>
+        <S.MainNoWaiting>아직 정보가 없어요 :(</S.MainNoWaiting>
       )}
     </>
   );
