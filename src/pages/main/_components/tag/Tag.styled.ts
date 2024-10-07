@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const TagWrapper = styled.div<{ $isSelected?: boolean }>`
   display: flex;
+  flex-shrink: 0;
   align-items: center;
 
   padding: 0.5rem 0.75rem;
@@ -16,7 +17,7 @@ export const TagWrapper = styled.div<{ $isSelected?: boolean }>`
   ${({ $isSelected }) =>
     $isSelected &&
     `
-    border: 1px solid white; 
+    box-shadow: 0 0 0 1px white;
     color:white;
   `}
 `;
@@ -28,7 +29,10 @@ export const TagImage = styled.img`
 
 export const TagListWrapper = styled.div`
   display: flex;
+  flex-shrink: 0;
+
   width: 100%;
-  padding: 1.25rem 2rem 1.5rem 2rem;
+  padding: 1rem 2rem 1.25rem 2rem;
   gap: 0.75rem;
+  overflow-x: scroll;
 `;

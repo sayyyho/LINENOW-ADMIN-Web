@@ -57,7 +57,7 @@ const MainPage = () => {
     setCallingCount(callingCount || 0);
     setArrivedCount(arrivedCount || 0);
     setCanceledCount(canceledCount || 0);
-  });
+  }, []);
 
   if (isLoading) {
     return (
@@ -76,11 +76,18 @@ const MainPage = () => {
         arrivedCount={arrivedCount}
         canceledCount={canceledCount}
       />
-      <S.MainWaitingCardList>
-        {waitings?.map((item, index) => (
-          <MainWaitingCard key={index} waiting={item} />
-        ))}
-      </S.MainWaitingCardList>
+
+      {waitings && waitings.length > 0 ? (
+        <S.MainWaitingCardList>
+          <S.MainWaitingCardListScroll>
+            {waitings.map((item, index) => (
+              <MainWaitingCard key={index} waiting={item} />
+            ))}
+          </S.MainWaitingCardListScroll>
+        </S.MainWaitingCardList>
+      ) : (
+        <S.MainNoWaiting>아직 대기가 없어요 :(</S.MainNoWaiting>
+      )}
     </>
   );
 };

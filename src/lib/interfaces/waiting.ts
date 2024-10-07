@@ -9,8 +9,8 @@ export interface Waiting {
 
   user: User;
 
-  confirmRemainingTime?: string;
-  arrivalRemainingTime?: string;
+  confirmDueTime?: string;
+  arrivalDueTime?: string;
 
   registeredAt: string;
   // readyToConfirmAt?: string;

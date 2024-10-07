@@ -33,7 +33,7 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
     waitingID: waiting.waitingID,
     userName: waiting.user.name,
     waitingStatus: waiting.waitingStatus,
-    targetTime: waiting.arrivalRemainingTime,
+    targetTime: waiting.arrivalDueTime,
   });
 
   const formatDate = (isoDate: string): string => {

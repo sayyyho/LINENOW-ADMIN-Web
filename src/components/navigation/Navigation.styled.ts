@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const NavigationWrapper = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   grid-column: 1 / 3;
 
   width: 100%;

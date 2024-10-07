@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const MainWaitingCardList = styled.section`
+export const MainWaitingCardListScroll = styled.div`
   display: grid;
-  align-items: start;
   column-gap: 1.5rem;
   row-gap: 2.5rem;
+  align-items: start;
 
   grid-template-columns: repeat(1, 1fr); /* 기본 1열 */
 
@@ -23,4 +23,18 @@ export const MainWaitingCardList = styled.section`
   width: 100%;
 
   padding: 1.5rem 2rem;
+`;
+export const MainWaitingCardList = styled.section`
+  flex-grow: 1;
+  overflow-y: scroll;
+`;
+
+export const MainNoWaiting = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: ${({ theme }) => theme.colors.font.white};
+  ${({ theme }) => theme.fonts.h1}
 `;
