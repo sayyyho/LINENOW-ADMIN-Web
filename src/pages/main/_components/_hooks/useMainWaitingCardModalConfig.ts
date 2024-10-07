@@ -30,7 +30,7 @@ const useMainWaitingCardModalConfig = (waitingID: number) => {
 
   const callWaitingModal = (userName: string): ModalExtensionProps => ({
     title: `${userName}님을 호출하시겠습니까?`,
-    sub: `손님에게 호출 알림톡이 전송됩니다.`,
+    sub: `손님에게 호출 알림 문자가 전송됩니다.`,
     secondButton: {
       children: "이전으로",
       onClick: () => {
@@ -50,7 +50,7 @@ const useMainWaitingCardModalConfig = (waitingID: number) => {
 
   const approveWaitingModal = (userName: string): ModalExtensionProps => ({
     title: `${userName}의 입장을 완료하시겠습니까?`,
-    sub: `입장완료를 누르면 윤혜정님의 입장이 완료됩니다.`,
+    sub: `입장완료를 누르면 ${userName}의 입장이 완료됩니다.`,
     secondButton: {
       children: "이전으로",
       onClick: () => {
