@@ -52,6 +52,18 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
     return `${ampm} ${formattedHours}시 ${minutes}분 · ${year}년 ${month}월 ${day}일`;
   };
 
+  //전화번호 복사
+  const handleCopyPhoneNumber = () => {
+    navigator.clipboard
+      .writeText(waiting.user.phoneNumber)
+      .then(() => {
+        alert("전화번호가 복사되었습니다!");
+      })
+      .catch((err) => {
+        console.error("전화번호 복사 실패:", err);
+      });
+  };
+
   return (
     <S.MainWaitingCardWrapper
       $backgroundColor={config.backgroundColor}
@@ -91,7 +103,10 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
               font={"b3"}
               fontColor={"gray"}
             >
-              <span style={{ textDecoration: "underline" }}>
+              <span
+                style={{ textDecoration: "underline", cursor: "pointer" }}
+                onClick={handleCopyPhoneNumber}
+              >
                 {waiting.user.phoneNumber}
               </span>
             </IconLabel>

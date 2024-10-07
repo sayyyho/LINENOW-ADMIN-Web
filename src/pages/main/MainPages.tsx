@@ -59,7 +59,7 @@ const MainPage = () => {
           </S.MainWaitingCardListScroll>
         </S.MainWaitingCardList>
       ) : (
-        <S.MainNoWaiting>아직 대기가 없어요 :(</S.MainNoWaiting>
+        <S.MainNoWaiting>아직 정보가 없어요 :(</S.MainNoWaiting>
       )}
     </>
   );
