@@ -1,5 +1,6 @@
 import {
   GetBoothStatus,
+  GetWaitingCountsResponse,
   PostBoothStatusRequest,
   PostWaitingsActionRequest,
   transtromGetBoothStatus,
@@ -7,6 +8,17 @@ import {
 import { getResponse, postNoResponse } from "@apis/instance";
 
 import { Booth } from "@interfaces/booth";
+
+export const getWaitingsCounts = async () => {
+  try {
+    const response = getResponse<GetWaitingCountsResponse>(
+      `/api/v1/manager/waiting-counts`
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const postWaitingsAction = async (
   waitingID: number,
