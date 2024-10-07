@@ -4,6 +4,7 @@ import {
 } from "@apis/domains/boothManaging/_interfaces";
 import {
   getBoothStatus,
+  getWaitingsCounts,
   postBoothOperation,
   postBoothStatus,
   postWaitingsAction,
@@ -91,5 +92,12 @@ export const usePostBoothOperation = () => {
     onError: () => {
       alert("처리중 오류가 발생했어요.\n다시 시도해주세요");
     },
+  });
+};
+
+export const useGetWaitingsCounts = () => {
+  return useQuery({
+    queryKey: [BOOTH_MANAGING_QUERY_KEY.WAITINGS_COUNTS],
+    queryFn: () => getWaitingsCounts(),
   });
 };

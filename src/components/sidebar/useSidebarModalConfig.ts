@@ -68,6 +68,9 @@ const useSidebarModalConfig = () => {
             status: "operating",
           },
         });
+        // Set firstUse to false in localStorage
+        localStorage.setItem("firstUse", "false");
+        closeModal(); // Close the modal after the operation
       },
     },
   });
