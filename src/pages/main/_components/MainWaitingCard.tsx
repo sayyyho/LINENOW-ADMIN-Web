@@ -54,14 +54,9 @@ const MainWaitingCard = ({ waiting }: MainWaitingCardProps) => {
 
   //전화번호 복사
   const handleCopyPhoneNumber = () => {
-    navigator.clipboard
-      .writeText(waiting.user.phoneNumber)
-      .then(() => {
-        alert("전화번호가 복사되었습니다!");
-      })
-      .catch((err) => {
-        console.error("전화번호 복사 실패:", err);
-      });
+    navigator.clipboard.writeText(waiting.user.phoneNumber).then(() => {
+      alert("전화번호가 복사되었습니다!");
+    });
   };
 
   return (
