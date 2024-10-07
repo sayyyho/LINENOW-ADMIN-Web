@@ -35,9 +35,7 @@ const LoginPage = () => {
               />
             </S.LoginBoxInputWrapper>
           </S.LoginBoxContent>
-          <Button width={"18rem"} onClick={handleLogin}>
-            로그인
-          </Button>
+          <Button onClick={handleLogin}>로그인</Button>
         </S.LoginBoxWrapper>
       </S.LoginWrapper>
     </>
