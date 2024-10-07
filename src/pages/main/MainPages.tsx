@@ -5,6 +5,7 @@ import * as S from "./MainPage.styled";
 import TagList from "./_components/tag/TagList";
 import Spinner from "@components/spinner/Spinner";
 import { WaitingStatusParams } from "@linenow-types/status";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
   const [selectedTag, setSelectedTag] = useState<string>("전체보기");
@@ -34,8 +35,20 @@ const MainPage = () => {
   const handleTagClick = (tag: string) => {
     setSelectedTag(tag);
   };
-
+  const navigate = useNavigate();
   useEffect(() => {
+    let firstUse = localStorage.getItem("firstUse");
+
+    if (firstUse === null) {
+      // Set firstUse to "true" if not found in localStorage
+      localStorage.setItem("firstUse", "true");
+      firstUse = "true";
+    }
+
+    if (firstUse === "true") {
+      navigate("/onboarding");
+    }
+
     const waitingCount = waitings?.filter(
       (item) => item.waitingStatus === "waiting"
     ).length;

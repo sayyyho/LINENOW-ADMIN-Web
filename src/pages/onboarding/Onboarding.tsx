@@ -12,7 +12,7 @@ export const OnboardingPage = () => {
   };
 
   return (
-    <>
+    <S.OnboardingWrapper onClick={() => setIsModalOpen(!isModalOpen)}>
       {isModalOpen && (
         <S.ModalBackground onClick={closeModal}>
           <S.ModalContainer onClick={(e) => e.stopPropagation()}>
@@ -46,6 +46,6 @@ export const OnboardingPage = () => {
       ) : (
         <div>아직 대기가 없습니다.</div>
       )}
-    </>
+    </S.OnboardingWrapper>
   );
 };
