@@ -176,12 +176,13 @@ const Sidebar = ({ isMobile, isOpen, setIsOpen }: SidebarProps) => {
             <>
               <h3>안녕하세요</h3>
               <h1>
-                <span className="lime">
+                {/* <span className="lime">
                   {window.location.pathname === "/onboarding"
                     ? "라인나우님"
                     : `${boothInfo?.name}`}
                 </span>
-                님
+                님 */}
+                <span className="lime">{boothInfo?.name}</span> 님
               </h1>
               <CommonButton>
                 <S.SidebarLogout onClick={handleLogoutClick}>

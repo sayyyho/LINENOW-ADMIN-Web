@@ -5,7 +5,7 @@ import * as S from "./MainPage.styled";
 import TagList from "./_components/tag/TagList";
 import Spinner from "@components/spinner/Spinner";
 import { WaitingStatusParams } from "@linenow-types/status";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { useGetWaitingsCounts } from "@hooks/apis/boothManaging";
 
 const MainPage = () => {
@@ -33,21 +33,22 @@ const MainPage = () => {
   const handleTagClick = (tag: string) => {
     setSelectedTag(tag);
   };
-  const navigate = useNavigate();
-  useEffect(() => {
-    let firstUse = localStorage.getItem("firstUse");
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   let firstUse = localStorage.getItem("firstUse");
 
-    if (firstUse === null) {
-      // Set firstUse to "true" if not found in localStorage
-      localStorage.setItem("firstUse", "true");
-      firstUse = "true";
-    }
+  //   if (firstUse === null) {
+  //     // Set firstUse to "true" if not found in localStorage
+  //     localStorage.setItem("firstUse", "true");
+  //     firstUse = "true";
+  //   }
 
-    if (firstUse === "true") {
-      navigate("/onboarding");
-    }
-  }, []);
+  //   if (firstUse === "true") {
+  //     navigate("/onboarding");
+  //   }
+  // }, []);
 
+  useEffect(() => {}, []);
 
   if (isLoading) {
     return (
