@@ -7,7 +7,7 @@ import FaqPage from "@pages/faq/FaqPage";
 import DefaultLayout from "@layouts/DefaultLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import GuestRoute from "./GuestRoute";
-import { OnboardingPage } from "@pages/onboarding/Onboarding";
+// import { OnboardingPage } from "@pages/onboarding/Onboarding";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         children: [
           { path: "/", element: <MainPage /> },
           { path: "/faq", element: <FaqPage /> },
-          { path: "/onboarding", element: <OnboardingPage /> },
+          // { path: "/onboarding", element: <OnboardingPage /> },
         ],
       },
     ],
